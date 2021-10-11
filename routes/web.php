@@ -34,3 +34,7 @@ Route::get('category/', [App\Http\Controllers\CategoryController::class, 'index'
 Route::get('category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.create');
 Route::post('category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
 Route::get('category/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('category.delete');
+
+//Order route
+Route::get('order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
+Route::get('order/create', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');

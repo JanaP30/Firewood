@@ -34,11 +34,6 @@ class OrderController extends Controller
 
         return redirect('/order');
 
-
-
-
-
-
     }
 
     /**

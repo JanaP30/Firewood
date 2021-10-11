@@ -21,6 +21,8 @@ class Order extends Model
         'quantity',
         'typeOfWood_id',
         'category_id',
+        'typeOfWood',
+        'category',
         'description'
 
     ];

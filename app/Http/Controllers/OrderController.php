@@ -61,7 +61,9 @@ class OrderController extends Controller
         $order->phone_number=$request->phone_number;
         $order->quantity=$request->quantity;
         $order->typeOfWood_id=$request->typeOfWood_id;
+        $order->typeOfWood=$request->typeOfWood;
         $order->category_id=$request->category_id;
+        $order->category=$request->category;
         $order->description=$request->description;
 
         return redirect('/order')->withSuccess('You have successfully created a order');

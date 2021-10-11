@@ -22,6 +22,25 @@ class OrderController extends Controller
         return view('order.index', $data);
     }
 
+
+    public function approved($id)
+    {
+        $order = Order::findOrFail($id);
+
+        $order->update([
+            'status'=>Order::$_ORDER_APPROVED
+
+        ]);
+
+        return redirect('/order');
+
+
+
+
+
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -38,3 +38,4 @@ Route::get('category/delete/{id}', [App\Http\Controllers\CategoryController::cla
 //Order route
 Route::get('order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
 Route::get('order/create', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
+Route::get('order/approved/{id}', [App\Http\Controllers\OrderController::class, 'approved'])->name('order.approved');

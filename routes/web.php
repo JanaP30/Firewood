@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
-Route::post('/store-order', [App\Http\Controllers\PublicController::class, 'store'])->name('store.order');
-    
+Route::post('/store-order', [App\Http\Controllers\PublicController::class, 'store'])->name('order.store');
+Route::get('/success/{id}', [PublicController::class, 'success']);    
 
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

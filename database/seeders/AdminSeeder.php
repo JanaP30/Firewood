@@ -15,13 +15,12 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $adminUserExist = User::where('email', 'admin@admin')->first();
-    
+        $adminUserExist = User::where('email', 'admin@admin.com')->first();
 
 
         if(!$adminUserExist){
 
-                $User = User::create([
+                User::create([
 
                         'name'=>'admin',
                         'email'=>'admin@admin.com',

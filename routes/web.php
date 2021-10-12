@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
+Route::post('/store-order', [App\Http\Controllers\PublicController::class, 'store'])->name('store.order');
+    
+
 
 Auth::routes();
 

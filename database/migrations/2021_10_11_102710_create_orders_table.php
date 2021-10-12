@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->decimal('quantity', 8,2);
             $table->bigInteger('typeOfWood_id');
             $table->bigInteger('category_id');
+            $table->bigInteger('typeOfWood');
+            $table->bigInteger('category');
             $table->longText('description');
             $table->softDeletes();
            

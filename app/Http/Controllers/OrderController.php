@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -52,7 +53,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormRequest $request)
     {
         $order = new Order();
         $order->first_name=$request->first_name;

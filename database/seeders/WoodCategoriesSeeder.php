@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\WoodCategory;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
 
 class WoodCategoriesSeeder extends Seeder
 {
@@ -13,7 +13,7 @@ class WoodCategoriesSeeder extends Seeder
 
         foreach($woodCategories as $name){
             
-            Category::firstOrCreate([
+            WoodCategory::firstOrCreate([
                 'name' => $name
             ]);
             

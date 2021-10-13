@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TypeOfWood;
+use App\Models\WoodType;
 use Illuminate\Http\Request;
 
 class TypeOfWoodController extends Controller
@@ -14,7 +15,7 @@ class TypeOfWoodController extends Controller
      */
     public function index()
     {
-        $typeOfWood =TypeOfWood::get();
+        $typeOfWood =WoodType::get();
         $data = [
             'typeOfWood'=>$typeOfWood
         ];
@@ -39,7 +40,7 @@ class TypeOfWoodController extends Controller
      */
     public function store(Request $request)
     {
-        $typeOfWood = new TypeOfWood();
+        $typeOfWood = new WoodType();
 
         $typeOfWood ->name = $request -> input ('name');
 
@@ -53,7 +54,7 @@ class TypeOfWoodController extends Controller
      * @param  \App\Models\TypeOfWood  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function show(TypeOfWood $typeOfWood)
+    public function show(WoodType $typeOfWood)
     {
         //
     }
@@ -64,7 +65,7 @@ class TypeOfWoodController extends Controller
      * @param  \App\Models\TypeOfWood  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function edit(TypeOfWood $typeOfWood)
+    public function edit(WoodType $typeOfWood)
     {
         //
     }
@@ -76,9 +77,9 @@ class TypeOfWoodController extends Controller
      * @param  \App\Models\TypeOfWood  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TypeOfWood $typeOfWood)
+    public function update(Request $request, WoodType $typeOfWood)
     {
-        $typeOfWood = TypeOfWood::findOrFail();
+        $typeOfWood = WoodType::findOrFail();
         
         $typeOfWood->update([
         'name' => $request -> input ('name')
@@ -92,9 +93,9 @@ class TypeOfWoodController extends Controller
      * @param  \App\Models\TypeOfWood  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TypeOfWood $typeOfWood)
+    public function destroy(WoodType $typeOfWood)
     {
-        $typeOfWood = TypeOfWood::findOrFail();
+        $typeOfWood = WoodType::findOrFail();
         $typeOfWood->delete();
         return redirect('/typeOfWood')->withSuccess("You have successfully deleted type of wood");
     }

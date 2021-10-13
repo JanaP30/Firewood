@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\TypeOfWood;
+use App\Models\WoodType;
 use Illuminate\Database\Seeder;
 use Mockery\Matcher\Type;
 
@@ -25,8 +25,9 @@ class WoodTypesSeeder extends Seeder
             //         'name' => $name
             //     ]);
             // }
-            TypeOfWood::firstOrCreate([
-                'name' => $name
+            WoodType::firstOrCreate([
+                'name' => $name,
+                'quantity' => 1000
             ]);
             
         }

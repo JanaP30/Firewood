@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@content
+@section('content')
 <div class="container bg-light p-5">
 
     <div class="row">
@@ -10,3 +10,4 @@
         </div>
     </div>
 </div>
+@endsection

@@ -11,7 +11,11 @@
         {{ Form::model($order, ['route' => ['order.store']]) }} 
         <div class="col-12 mt-3">
             <h1 class="">Create order</h1>
-    
+            <div class="row">
+                <div class="col-12">
+                    @include('shared.validation-errors')
+                </div>
+            </div>
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
@@ -47,22 +51,8 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="selectwoodType">Select wood type</label>
-                        <select name="type_of_wood_id" class="form-select" id="selectwoodType">
-                            <option value="" selected disabled>
-                                Choose one
-                            </option>
-                            @foreach ($typesOfWood as $typeOfWood)
-                            <option value="{{$typeOfWood->id}}">{{$typeOfWood->name}}</option>
-                            @endforeach
-                            
-                        </select>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="form-group">
-                        <label for="selectwoodType">Select categories</label>
-                        <select name="category_id" class="form-select" id="selectwoodType">
+                        <label for="wood_category_id">Select categories</label>
+                        <select name="wood_category_id" class="form-select" id="wood_category_id">
                             <option value="" selected disabled>
                                 Choose one
                             </option>
@@ -75,8 +65,22 @@
                 </div>
                 <div class="col-4">
                     <div class="form-group">
+                        <label for="wood_type_id">Select wood type</label>
+                        <select name="wood_type_id" class="form-select" id="wood_type_id">
+                            <option value="" selected disabled>
+                                Choose one
+                            </option>
+                            @foreach ($typesOfWood as $typeOfWood)
+                            <option value="{{$typeOfWood->id}}">{{$typeOfWood->name}}</option>
+                            @endforeach
+                            
+                        </select>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
                         <label for="quantity">Quantity</label>
-                        <input type="text" name="quantity" id="quantity" class="form-control" required>
+                        <input type="number" name="quantity" id="quantity" class="form-control" required>
                     </div>
                 </div>
             

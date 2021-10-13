@@ -29,8 +29,8 @@ class OrderRequest extends FormRequest
             'address'=>'required',
             'phone_number'=>'required',
             'quantity'=>'required',
-            'type_of_wood_id'=>'required',
-            'category_id'=>'required',
+            'wood_type_id'=>'required',
+            'wood_category_id'=>'required',
             'note'=>'required'
         ];
     }

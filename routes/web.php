@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\PublicController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
-Route::post('/store-order', [App\Http\Controllers\PublicController::class, 'store'])->name('order.store');
-Route::get('/success/{id}', [PublicController::class, 'success']);    
+Route::post('/store-order', [OrdersController::class, 'store'])->name('order.store');
+Route::get('/success/{id}', [OrdersController::class, 'success']);    
 
 
 // Auth::routes();

@@ -27,17 +27,17 @@ Route::get('/success/{id}', [OrdersController::class, 'success']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-//TypeOfWood route
-Route::get('typeOfWood/', [App\Http\Controllers\TypeOfWoodController::class, 'index'])->name('typeOfWood.index');
-Route::get('typeOfWood/create', [App\Http\Controllers\TypeOfWoodController::class, 'create'])->name('typeOfWood.create');
-Route::post('typeOfWood/update/{id}', [App\Http\Controllers\TypeOfWoodController::class, 'update'])->name('typeOfWood.update');
-Route::get('typeOfWood/delete/{id}', [App\Http\Controllers\TypeOfWoodController::class, 'delete'])->name('typeOfWood.delete');
+//ProductType route
+Route::get('product-type/', [App\Http\Controllers\ProductTypeController::class, 'index'])->name('productType.index');
+Route::get('product-type/create', [App\Http\Controllers\ProductTypeController::class, 'create'])->name('productType.create');
+Route::post('product-type/update/{id}', [App\Http\Controllers\ProductTypeController::class, 'update'])->name('productType.update');
+Route::get('product-type/delete/{id}', [App\Http\Controllers\ProductTypeController::class, 'delete'])->name('productType.delete');
 
 //Category route
-Route::get('category/', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
-Route::get('category/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.create');
-Route::post('category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
-Route::get('category/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('category.delete');
+Route::get('products/', [App\Http\Controllers\CategoryController::class, 'index'])->name('products.index');
+Route::get('products/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('products.create');
+Route::post('products/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('products.update');
+Route::get('products/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('products.delete');
 
 //Order route
 Route::get('order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');

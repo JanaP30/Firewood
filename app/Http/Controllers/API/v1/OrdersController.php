@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\WoodType;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -15,13 +15,14 @@ class OrdersController extends Controller
         
         //validacija
         $request->validate([
-            'type_of_wood_id' => 'required',
-            'qty' => 'required',
+            
+            'product_type_id'=> 'required',
+             'qty' => 'required',
         ]);
         
         //error first
         
-        $type = WoodType::find($request->input('type_of_wood_id'));
+        $type = ProductType::find($request->input('product_type_id'));
         
         if(!$type){
             Log::error('Requested unknown wood type');

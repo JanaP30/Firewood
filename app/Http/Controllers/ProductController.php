@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,11 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category =Category::get();
+        $products =Product::get();
         $data = [
-            'category'=>$category
+            'products'=>$products
         ];
-        return view('category.index',$data);
+        return view('products.index',$data);
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('products.create');
     }
 
     /**
@@ -39,11 +39,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
+        $products = new Product();
 
-        $category->name->$request->input('name');
+        $products->name->$request->input('name');
 
-        return redirect('/category')->withSuccess('You have successfully created a category');
+        return redirect('/products')->withSuccess('You have successfully created a product');
     }
 
     /**
@@ -52,7 +52,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Product $category)
     {
         //
     }
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Product $category)
     {
         //
     }
@@ -75,16 +75,16 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Product $products)
     {
-        $category = Category::fndOrFail();
-        $category->update([
+        $products = Product::fndOrFail();
+        $products->update([
 
             'name' => $request -> input ('name')
 
            ]);  
 
-            return redirect('/category')->withSuccess('You have successfully update a category');
+            return redirect('/products')->withSuccess('You have successfully update a product');
 
        
     }
@@ -95,11 +95,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Product $products)
     {
-        $category = Category::findOrFail();
-        $category->delete();
+        $products = Product::findOrFail();
+        $products->delete();
        
-        return redirect('/category')->withSuccess("You have successfully deleted category");
+        return redirect('/products')->withSuccess("You have successfully deleted product");
     }
 }

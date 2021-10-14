@@ -140,7 +140,7 @@ class OrdersController extends Controller
         $order= Order:: findOrFail();
         $order->update([
 
-            'quantity'=>$request->input('quantity')->where($quantity=$quantity - $order),
+           // 'quantity'=>$request->input('quantity')->where($quantity=$quantity - $order),
 
            // 'quantity'=>$request->$quantity - $order;
            // $stock->$request->input('stock'),

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Order;
-use App\Models\TypeOfWood;
-use App\Models\WoodCategory;
-use App\Models\WoodType;
+use App\Models\Product;
+use App\Models\ProductType;
+
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -14,13 +14,15 @@ class PublicController extends Controller
 public function index(){
     
 
-    $typesOfWood =WoodType::get();
-    $categories = WoodCategory::get();
+    $products = Product::get();
+    $productTypes = ProductType::get();
+    
     $data = [
-        'typesOfWood'=>$typesOfWood,
-        'categories'=>$categories,
+        'productTypes'=>$productTypes,
+        'products'=> $products,
         'order' => new Order()
     ];
+    
     return view('welcome',$data);
 }
 

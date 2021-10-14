@@ -6,13 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class WoodType extends Model
+use App\Models\Product;
+
+class ProductType extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
         'name',
-        'quantity' 
+        'product_type_id'
     ];
+
+
+    public function category()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

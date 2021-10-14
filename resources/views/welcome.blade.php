@@ -1,8 +1,6 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+@section('content')
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-    crossorigin="anonymous"></script>
 
 <div class="container bg-light p-5">
 
@@ -51,27 +49,28 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="wood_category_id">Select categories</label>
+                        <label for="wood_category_id">Select product</label>
                         <select name="wood_category_id" class="form-select" id="wood_category_id">
                             <option value="" selected disabled>
                                 Choose one
                             </option>
-                            @foreach ($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @foreach ($products as $one_product)
+                            <option value="{{$one_product->id}}">{{$one_product->name}}</option>
                             @endforeach
                             
                         </select>
                     </div>
                 </div>
                 <div class="col-4">
+
                     <div class="form-group">
-                        <label for="wood_type_id">Select wood type</label>
-                        <select name="wood_type_id" class="form-select" id="wood_type_id">
+                        <label for="product_type_id">Select product type</label>
+                        <select name="product_type_id" class="form-select" id="product_type_id">
                             <option value="" selected disabled>
                                 Choose one
                             </option>
-                            @foreach ($typesOfWood as $typeOfWood)
-                            <option value="{{$typeOfWood->id}}">{{$typeOfWood->name}}</option>
+                            @foreach ($productTypes as $type)
+                            <option value="{{$type->id}}">{{$type->name}}</option>
                             @endforeach
                             
                         </select>

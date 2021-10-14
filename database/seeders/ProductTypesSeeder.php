@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\WoodType;
+use App\Models\ProductType;
 use Illuminate\Database\Seeder;
 use Mockery\Matcher\Type;
 
-class WoodTypesSeeder extends Seeder
+class ProductTypesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,9 +15,9 @@ class WoodTypesSeeder extends Seeder
      */
     public function run()
     {
-        $woodTypes = ['Beech', 'Oak', 'Rosewood', 'Birch'];
+        $productType = ['Beech', 'Oak', 'Rosewood', 'Birch'];
 
-        foreach($woodTypes as $name){
+        foreach($productType as $name){
             // $type = TypeOfWood::where('name', $name)->first();
 
             // if(!$type){
@@ -25,9 +25,10 @@ class WoodTypesSeeder extends Seeder
             //         'name' => $name
             //     ]);
             // }
-            WoodType::firstOrCreate([
+            ProductType::firstOrCreate([
                 'name' => $name,
                 'quantity' => 1000
+                
             ]);
             
         }

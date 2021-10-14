@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TypeOfWood;
-use App\Models\WoodType;
+
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 
 class TypeOfWoodController extends Controller
@@ -15,11 +15,11 @@ class TypeOfWoodController extends Controller
      */
     public function index()
     {
-        $typeOfWood =WoodType::get();
+        $productType =ProductType::get();
         $data = [
-            'typeOfWood'=>$typeOfWood
+            'typeOfWood'=>$productType
         ];
-        return view('typeOfWood.index',$data);
+        return view('product-type.index',$data);
     }
 
     /**
@@ -29,7 +29,7 @@ class TypeOfWoodController extends Controller
      */
     public function create()
     {
-        return view('typeOfWood.create');
+        return view('product-type.create');
     }
 
     /**
@@ -40,21 +40,21 @@ class TypeOfWoodController extends Controller
      */
     public function store(Request $request)
     {
-        $typeOfWood = new WoodType();
+        $productType = new ProductType();
 
-        $typeOfWood ->name = $request -> input ('name');
+        $productType ->name = $request -> input ('name');
 
-        return redirect('/typeOfWood')->withSuccess('You have successfully created a type of wood');
+        return redirect('/product-type')->withSuccess('You have successfully created a type of wood');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TypeOfWood  $typeOfWood
+     * @param  \App\Models\ProductType  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function show(WoodType $typeOfWood)
+    public function show(ProductType $typeOfWood)
     {
         //
     }
@@ -62,13 +62,10 @@ class TypeOfWoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TypeOfWood  $typeOfWood
+     * @param  \App\Models\ProductType  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function edit(WoodType $typeOfWood)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -77,26 +74,26 @@ class TypeOfWoodController extends Controller
      * @param  \App\Models\TypeOfWood  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WoodType $typeOfWood)
+    public function update(Request $request, ProductType $productType)
     {
-        $typeOfWood = WoodType::findOrFail();
+        $productType = ProductType::findOrFail();
         
-        $typeOfWood->update([
+        $productType->update([
         'name' => $request -> input ('name')
         ]);
-        return redirect('/typeOfWood')->withSuccess('You have successfully update a type of wood');
+        return redirect('/product-type')->withSuccess('You have successfully update a product');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TypeOfWood  $typeOfWood
+     * @param  \App\Models\ProductType  $typeOfWood
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WoodType $typeOfWood)
+    public function destroy(ProductType $productType)
     {
-        $typeOfWood = WoodType::findOrFail();
-        $typeOfWood->delete();
-        return redirect('/typeOfWood')->withSuccess("You have successfully deleted type of wood");
+        $productType = ProductType::findOrFail();
+        $productType->delete();
+        return redirect('/product-type')->withSuccess("You have successfully deleted product");
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWoodCategoriesTable extends Migration
+class AddTypesIdToProductTypes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateWoodCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wood_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('product_types', function (Blueprint $table) {
+            $table->integer('product_types_id');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateWoodCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wood_categories');
+        Schema::table('product_types', function (Blueprint $table) {
+            $table->dropIfExists('product_types_id');
+        });
     }
 }

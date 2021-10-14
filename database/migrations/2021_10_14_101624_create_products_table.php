@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWoodTypesTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateWoodTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wood_types', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('quantity');
+            $table->string('product_type_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ class CreateWoodTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wood_types');
+        Schema::dropIfExists('products');
     }
 }

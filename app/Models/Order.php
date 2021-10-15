@@ -19,8 +19,8 @@ class Order extends Model
         'address',
         'phone_number',
         'quantity',
-        'wood_type_id',
-        'wood_category_id',
+        'product_type_id',
+        'products_id',
         'note'
 
     ];

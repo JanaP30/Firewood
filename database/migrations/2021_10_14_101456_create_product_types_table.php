@@ -17,7 +17,6 @@ class CreateProductTypesTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('name');
-            $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
         });

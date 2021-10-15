@@ -22,6 +22,6 @@ class Product extends Model
 
     public function types()
     {
-        return $this->hasMany(ProductType::class);
+        return $this->belongsToMany(ProductType::class);
     }
 }

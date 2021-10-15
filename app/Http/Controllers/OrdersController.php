@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
-use App\Models\WoodType;
+use App\Models\ProductType;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -71,7 +71,7 @@ class OrdersController extends Controller
         //2. nema proizvoda na stanju
         //2.
 
-        $type = WoodType::find($input['wood_type_id']);
+        $type = ProductType::find($input['product_type_id']);
         if(!$type){
             return redirect()->back()->withErrors(['Product type does not exist.']);
         }
@@ -112,9 +112,9 @@ class OrdersController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+       
     }
 
     /**

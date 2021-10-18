@@ -19,7 +19,7 @@ class Product extends Model
         
     ];
 
-    public function types()
+    public function product_types()
     {
         return $this->belongsToMany(ProductType::class)->withPivot('quantity');
     }

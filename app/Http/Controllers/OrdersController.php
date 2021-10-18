@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use App\Models\ProductType;
+use App\Models\Product;
+use App\Models\ProductProductType;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -71,8 +73,10 @@ class OrdersController extends Controller
         //1. traženi tip ne postoji
         //2. nema proizvoda na stanju
         //2.
-
         $type = ProductType::find($input['product_type_id']);
+        $product = Product::find($input['product_id']);
+        //$pivot = $product->product_types()->wherePivot('product_type_id', $input['product_type_id'])->first()->pivot;
+
         if(!$type){
             return redirect()->back()->withErrors(['Product type does not exist.']);
         }

@@ -16,13 +16,16 @@ class ProductProductType extends Model
         
     ];
 
-    public function quantities()
+    public function product()
     {
         return $this->belongsToMany(Product::class)->using(ProductType::class);
     }
 
 
-
+    public function productType()
+    {
+        return $this->belongsToMany(Product::class)->using(ProductType::class);
+    }
 
 
 

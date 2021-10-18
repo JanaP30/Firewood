@@ -40,7 +40,7 @@ Route::post('products/update/{id}', [App\Http\Controllers\CategoryController::cl
 Route::get('products/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('products.delete');
 
 //Order route
-Route::get('order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
-Route::get('order/create', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
-Route::get('order/approved/{id}', [App\Http\Controllers\OrderController::class, 'approved'])->name('order.approved');
+Route::get('order/', [OrdersController::class, 'index'])->name('order.index');
+Route::get('order/create', [OrdersController::class, 'create'])->name('order.create');
+Route::get('order/approved/{id}', [OrdersController::class, 'approved'])->name('order.approved');
 

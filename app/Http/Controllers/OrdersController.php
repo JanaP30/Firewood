@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\ProductType;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
@@ -49,7 +50,15 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('order.create');
+        $products = Product::get();
+        $productTypes = ProductType::get();
+        
+        $data = [
+            'productTypes'=>$productTypes,
+            'products'=> $products,
+            'order' => new Order()
+        ];
+        return view('order.create', $data);
     }
 
     /**

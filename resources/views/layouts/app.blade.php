@@ -17,22 +17,23 @@
             crossorigin="anonymous"
         />
         <script defer src="/js/app.js"></script>
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+        <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
     </head>
     <body
         class="d-flex flex-column bg-dark"
         style="
-            background-image: url('https://images.squarespace-cdn.com/content/v1/5bf305b49772aece186011cc/1562344040843-W1Z9Z9NO1CL8ICKBY3S9/firewood.jpg?format=1000w');
+            background-image: url('https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
             background-repeat: no-repeat;
             background-size: cover;
+            
         "
     >
-        <header class="d-flex flex-row bg-danger">
-            <img
+        <header class="d-flex flex-row bg-danger header">
+            <a href="#"><img
                 src="https://studio.code.org/media?u=https%3A%2F%2Fanimalcrossingworld.com%2Fwp-content%2Fuploads%2F2019%2F08%2Fanimal-crossing-pocket-camp-how-to-get-wood.png"
                 alt="Logo picture"
                 class="logo"
-            />
+            /></a>
             <div class="navbar d-flex">
                 <a class="register" id="registerButton" href="#register"
                     >Register</a
@@ -47,11 +48,9 @@
             </div>
         </header>
         @yield('content')
-        <footer class="d-flex flex-column bg-danger">
+        <footer class="d-flex flex-column bg-danger footer">
             <div class="d-flex flex-column">
-                <a class="faq">FAQ</a>
-                <a class="terms">Terms</a>
-                <a class="about">About</a>
+                <p>Copyrights 2021 &copy; All rights reserved.</p>
             </div>
         </footer>
     </body>

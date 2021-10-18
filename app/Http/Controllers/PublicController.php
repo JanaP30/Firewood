@@ -23,7 +23,7 @@ public function index(){
         'order' => new Order()
     ];
     
-    return view('welcome',$data);
+    return view('home',$data);
 }
 
 

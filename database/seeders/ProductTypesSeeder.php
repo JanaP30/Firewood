@@ -27,7 +27,7 @@ class ProductTypesSeeder extends Seeder
             // }
             ProductType::firstOrCreate([
                 'name' => $name,
-                'quantity' => 1000
+               
                 
             ]);
             

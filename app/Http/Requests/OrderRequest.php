@@ -30,7 +30,7 @@ class OrderRequest extends FormRequest
             'phone_number'=>'required',
             'quantity'=>'required',
             'product_type_id'=>'required',
-            'products_id'=>'required',
+            'product_id'=>'required',
             'note'=>'required'
         ];
     }

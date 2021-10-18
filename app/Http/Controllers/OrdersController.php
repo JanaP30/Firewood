@@ -60,12 +60,13 @@ class OrdersController extends Controller
      */
     public function store(OrderRequest $request)
     {
+
         //normalizacija
         $input = $request->input();
         $input['quantity'] = (integer)$input['quantity'];
 
         
-        
+      
         //imamo li razloga da ne uradimo logiku - error first paradigma
         //1. traženi tip ne postoji
         //2. nema proizvoda na stanju

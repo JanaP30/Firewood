@@ -16,12 +16,11 @@ class Product extends Model
 
     protected $fillable = [
         'name',
-        'quantity',
-        'product_type_id'
+        
     ];
 
     public function types()
     {
-        return $this->belongsToMany(ProductType::class);
+        return $this->belongsToMany(ProductType::class)->withPivot('quantity');
     }
 }

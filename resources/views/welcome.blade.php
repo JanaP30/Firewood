@@ -49,8 +49,8 @@
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="wood_category_id">Select product</label>
-                        <select name="wood_category_id" class="form-select" id="wood_category_id">
+                        <label for="product_id">Select product</label>
+                        <select name="product_id" class="form-select" id="product_id">
                             <option value="" selected disabled>
                                 Choose one
                             </option>

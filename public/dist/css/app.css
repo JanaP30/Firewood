@@ -11404,3 +11404,8 @@ footer p {
   color: #fff;
   font-size: 15px;
 }
+
+.error-msg {
+  font-size: 14px;
+  color: tomato;
+}

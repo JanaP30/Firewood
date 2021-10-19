@@ -26,6 +26,9 @@ Route::get('/success/{id}', [OrdersController::class, 'success']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/register', [App\Http\Controllers\RegisterController::class, 'index'])->name('register');
+
+
 
 //ProductType route
 Route::get('product-type/', [App\Http\Controllers\ProductTypeController::class, 'index'])->name('productType.index');

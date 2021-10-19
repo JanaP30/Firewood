@@ -32,6 +32,45 @@
 // const app = new Vue({
 //     el: '#app',
 // });
+//sanjin
+//plain JS
+// let userPassword = document.getElementById('password').value;
+// let confirmPassword = document.getElementById('password-confirm');
+// function matchPassword() {   
+//     if(userPassword != confirmPassword)  
+//     {   
+//       alert("Passwords did not match");  
+//     } else {  
+//       alert("Password created successfully");  
+//     }  
+//   }  
+var userPassword = document.getElementById('password');
+var userConfirmPassword = document.getElementById('password-confirm');
+var registerForm = document.getElementById('register-form');
+var userEmail = document.getElementById('email');
+var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
+registerForm.addEventListener('submit', function (event) {
+  //validation
+  event.preventDefault(); // Email 
+  // Password confirmation
+
+  var passErr = document.getElementById('confirm-password-error');
+
+  if (userPassword.value === userConfirmPassword.value) {
+    passErr.classList.add('d-none');
+  } else {
+    passErr.classList.remove('d-none');
+  }
+}); // jquery
+
+/*
+const jquserPassword = $('#password');
+const jquserConfirmPassword = $('#password-confirm');
+
+$('#register-form').on('submit', function(event) {
+    event.preventDefault();
+    $(this).css({background: 'red'});
+})*/
 
 /***/ }),
 

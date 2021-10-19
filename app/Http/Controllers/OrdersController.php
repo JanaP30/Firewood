@@ -66,22 +66,16 @@ class OrdersController extends Controller
         //normalizacija
         $input = $request->input();
         $input['quantity'] = (integer)$input['quantity'];
-
-        
       
-        //imamo li razloga da ne uradimo logiku - error first paradigma
-        //1. traženi tip ne postoji
-        //2. nema proizvoda na stanju
-        //2.
-        $type = ProductType::find($input['product_type_id']);
-        $product = Product::find($input['product_id']);
-        //$pivot = $product->product_types()->wherePivot('product_type_id', $input['product_type_id'])->first()->pivot;
 
-        if(!$type){
-            return redirect()->back()->withErrors(['Product type does not exist.']);
+
+        $productTypeProduct = ProductProductType::find($input['combination_id']);
+        if(!$productTypeProduct){
+            return redirect()->back()->withErrors(['No such combination']);
         }
 
-        if($type->quantity < $input['quantity']){
+       
+        if($productTypeProduct->quantity < $input['quantity']){
             return redirect()->back()->withErrors(['Requested product quantity not available.']);
         }
 
@@ -89,13 +83,23 @@ class OrdersController extends Controller
             
             DB::beginTransaction();
 
-            $newTypeQty = $type->quantity - $input['quantity'];
+            $newTypeQty = $productTypeProduct->quantity - $input['quantity'];
             
-            $type->update([
+            $productTypeProduct->update([
                 'quantity' => $newTypeQty
             ]);
 
-            $order = Order::create($input);
+            
+            $order = Order::create([
+                'first_name' => $input['first_name'],
+                'last_name' => $input['last_name'],
+                'address'  => $input['address'],
+                'phone_number' => $input['phone_number'],
+                'quantity' => $input['quantity'],
+                'product_type_id' => $productTypeProduct->product_type_id,
+                'product_id' => $productTypeProduct->product_id,
+                'note' => $input['note']
+            ]);
 
             DB::commit();
 

@@ -47,36 +47,22 @@
             </div>
             
             <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group">
-                        <label for="product_id">Select product</label>
-                        <select name="product_id" class="form-select" id="product_id">
+                        <label for="combination_id">Select product</label>
+                        <select name="combination_id" class="form-select" id="product_id">
                             <option value="" selected disabled>
                                 Choose one
                             </option>
-                            @foreach ($products as $one_product)
-                            <option value="{{$one_product->id}}">{{$one_product->name}}</option>
+                            @foreach ($combinations as $combination)
+                            <option value="{{$combination->id}}">{{$combination->product->name .  '-' . $combination->productType->name}}</option>
                             @endforeach
                             
                         </select>
                     </div>
                 </div>
-                <div class="col-4">
-
-                    <div class="form-group">
-                        <label for="product_type_id">Select product type</label>
-                        <select name="product_type_id" class="form-select" id="product_type_id">
-                            <option value="" selected disabled>
-                                Choose one
-                            </option>
-                            @foreach ($productTypes as $type)
-                            <option value="{{$type->id}}">{{$type->name}}</option>
-                            @endforeach
-                            
-                        </select>
-                    </div>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
                         <input type="number" name="quantity" id="quantity" class="form-control" required>

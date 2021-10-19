@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\ProductProductType;
 use App\Models\ProductType;
 
 use Illuminate\Http\Request;
@@ -14,13 +15,11 @@ class PublicController extends Controller
 public function index(){
     
 
-    $products = Product::get();
-    $productTypes = ProductType::get();
+    $combinations = ProductProductType::where('quantity', '>', 0)->get();
     
     $data = [
-        'productTypes'=>$productTypes,
-        'products'=> $products,
-        'order' => new Order()
+        'order' => new Order(),
+        'combinations' => $combinations
     ];
     
     return view('welcome',$data);

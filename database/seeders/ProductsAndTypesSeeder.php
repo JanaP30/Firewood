@@ -36,9 +36,9 @@ class ProductsAndTypesSeeder extends Seeder
             echo ($product->name . "\n");
             echo ($productType->name . "\n");
             echo ('----' . "\n");
-            $product->types()->attach($productType);
-            $product->pivot->quantity = 1000;
-            $product->pivot->save();
+            $product->product_types()->attach($productType);
+            // $product->pivot->quantity = 1000;
+            // $product->pivot->save();
             
         }
 

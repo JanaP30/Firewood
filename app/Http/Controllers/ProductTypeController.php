@@ -17,7 +17,7 @@ class TypeOfWoodController extends Controller
     {
         $productType =ProductType::get();
         $data = [
-            'typeOfWood'=>$productType
+            'productType'=>$productType
         ];
         return view('product-type.index',$data);
     }

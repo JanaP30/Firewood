@@ -20,7 +20,7 @@ class Order extends Model
         'phone_number',
         'quantity',
         'product_type_id',
-        'products_id',
+        'product_id',
         'note'
 
     ];

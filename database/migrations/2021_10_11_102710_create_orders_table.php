@@ -22,11 +22,12 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->string('phone_number');
             $table->integer('quantity');
-            $table->integer('wood_category_id');
-            $table->integer('wood_type_id');
+            $table->integer('product_type_id');
+            $table->integer('product_id');
             $table->text('note');
             $table->timestamps();
             $table->softDeletes();
+
            
         });
 

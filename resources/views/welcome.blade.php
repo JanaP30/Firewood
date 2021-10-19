@@ -17,15 +17,15 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="first_name">Name</label>
+                        <label for="first_name">Name </label>
                         <!-- {{ Form::text('first_name', 'Name', ['id' => 'first_name', 'class' => 'form-control']) }} -->
-                        <input name='first_name' type="text" class="form-control" id="first_name" placeholder="Please insert your name" required />
+                        <input name='first_name' type="text" class="form-control" id="first_name" placeholder="Please insert your name" required>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="last_name">Surname</label>
-                        <input name='last_name' type="text" class="form-control" id="last_name" placeholder="Surname" required />
+                        <label for="last_name">Surname </label>
+                        <input name='last_name' type="text" class="form-control" id="last_name" placeholder="Surname" required>
                     </div>
                 </div>
             </div>

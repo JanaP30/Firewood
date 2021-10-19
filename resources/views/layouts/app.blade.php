@@ -20,16 +20,11 @@
         <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}" />
     </head>
     <body
-        class="d-flex flex-column bg-dark"
-        style="
-            background-image: url('https://images.unsplash.com/photo-1546484396-fb3fc6f95f98?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
-            background-repeat: no-repeat;
-            background-size: cover;
-            
-        "
+        class="d-flex flex-column"
+        
     >
-        <header class="d-flex flex-row bg-danger header">
-            <a href="#"><img
+        <header class="d-flex flex-row header">
+            <a href="/"><img
                 src="https://studio.code.org/media?u=https%3A%2F%2Fanimalcrossingworld.com%2Fwp-content%2Fuploads%2F2019%2F08%2Fanimal-crossing-pocket-camp-how-to-get-wood.png"
                 alt="Logo picture"
                 class="logo"
@@ -48,7 +43,7 @@
             </div>
         </header>
         @yield('content')
-        <footer class="d-flex flex-column bg-danger footer">
+        <footer class="d-flex flex-column footer">
             <div class="d-flex flex-column">
                 <p>Copyrights 2021 &copy; All rights reserved.</p>
             </div>

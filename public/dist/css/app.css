@@ -11292,44 +11292,67 @@ textarea.form-control-lg {
   box-sizing: border-box;
 }
 
-.landing-heading {
-  color: #fff;
+.content {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.centered-box {
   text-align: center;
-  font-size: 50px;
+}
+
+.landing-heading {
+  color: #474747;
+  text-align: center;
+  font-size: 40px;
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 120px;
+  text-transform: uppercase;
 }
 
 .landing-text {
-  color: #fff;
-  text-align: center;
-  font-size: 30px;
+  color: #474747;
+  text-align: justify;
+  font-size: 22px;
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 25px;
+  width: 60%;
+  margin-left: 20%;
 }
 
 .landing-btn {
   text-align: center;
-  color: #fff;
+  color: #474747;
   text-decoration: none;
   border-radius: 50px;
-  border: 1px solid red;
-  background-color: red;
-  padding: 15px 30px;
-  width: 10%;
-  margin-left: 45%;
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 120px;
+  border: 1px solid #474747;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 10px 30px;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+.landing-btn a {
+  text-align: center;
 }
 
 .landing-btn:hover {
   color: #fff;
-  background-color: #cc0000;
-  border: 1px solid #cc0000;
+  background-color: #474747;
+  border: 1px solid #474747;
+  border-radius: 5px;
+}
+
+.wood {
+  max-width: 100%;
+  height: 350px;
 }
 
 header {
-  background-color: #797676;
+  background-color: #474747;
+  height: 100px;
+  width: 100%;
 }
 
 .header {
@@ -11368,11 +11391,14 @@ header {
   color: #dddddd;
 }
 
-.footer {
-  padding: 30px;
+footer {
+  background-color: #474747;
+  height: 100px;
+  width: 100%;
+  padding: 33px;
 }
 
-.footer p {
+footer p {
   text-align: center;
   text-transform: uppercase;
   color: #fff;

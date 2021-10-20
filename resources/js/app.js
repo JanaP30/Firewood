@@ -4,6 +4,8 @@
 //  * building robust, powerful web applications using Vue and Laravel.
 //  */
 
+const { Input } = require("postcss");
+
 // require('./bootstrap');
 
 // window.Vue = require('vue').default;
@@ -46,21 +48,35 @@
 //     }  
 //   }  
 
-const userPassword = document.getElementById('password');
-const userConfirmPassword = document.getElementById('password-confirm');
-const registerForm = document.getElementById('register-form');
-
+const userName = document.getElementById('name');
 
 const userEmail = document.getElementById('email');
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
+
+
+const userPassword = document.getElementById('password');
+const userConfirmPassword = document.getElementById('password-confirm');
+const registerForm = document.getElementById('register-form');
+const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/gi;
+
+
 
 registerForm.addEventListener('submit', function(event) {
     //validation
     event.preventDefault();
 
-    // Email 
     
+    
+    // Name
+    nameValidation();
+   
 
+    // Email validation
+    emailValidation();
+
+    // Password validation
+    passwordValidation();
+    
     // Password confirmation
     const passErr = document.getElementById('confirm-password-error');
     if (userPassword.value === userConfirmPassword.value) {
@@ -68,10 +84,48 @@ registerForm.addEventListener('submit', function(event) {
     } else {
         passErr.classList.remove('d-none');
     }
-
 });
 
 
+function emailValidation() {
+    const emailErr = document.getElementById('email-error');
+    if (userEmail.value === '') {
+        emailErr.classList.remove('d-none');
+        emailErr.innerHTML= 'Please fill out this field.';
+    } else if (userEmail.value.match(emailRegex)) {
+        emailErr.classList.add('d-none');
+    } else {
+        emailErr.classList.remove('d-none');
+        emailErr.innerHTML= 'Email is not valid';
+    }
+};
+
+
+function passwordValidation() {
+    const pwErr = document.getElementById('password-error');
+    console.log('first', pwErr);
+    if (userPassword.value === '') {
+        pwErr.classList.remove('d-none');
+        pwErr.innerHTML= 'Please fill out this field.';
+    } else if (userPassword.value.match(pwRegex)) {
+        pwErr.classList.add('d-none');
+    } else {
+        console.log('second', pwErr);
+        pwErr.classList.remove('d-none');
+        pwErr.innerHTML= 'Your password must contain at least 8 characters, one numeric character, one special character, uppercase and lowercase letters';
+    }
+};
+
+function nameValidation() {
+    const nameErr = document.getElementById('name-error');
+    console.log(nameErr);
+    if (userName.value === '') {
+        nameErr.classList.remove('d-none');
+        nameErr.innerHTML= 'Please fill out this field.';
+    } else {
+        nameErr.classList.add('d-none');
+    }
+};
 
 
 // jquery

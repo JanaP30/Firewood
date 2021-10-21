@@ -7,11 +7,13 @@
   \*****************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-// /**
+"use strict";
+ // /**
 //  * First we will load all of this project's JavaScript dependencies which
 //  * includes Vue and other libraries. It is a great starting point when
 //  * building robust, powerful web applications using Vue and Laravel.
 //  */
+
 var _require = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/postcss.js"),
     Input = _require.Input; // require('./bootstrap');
 // window.Vue = require('vue').default;
@@ -53,8 +55,14 @@ var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
 var userPassword = document.getElementById('password');
 var userConfirmPassword = document.getElementById('password-confirm');
 var registerForm = document.getElementById('register-form');
-var pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/gi;
-registerForm.addEventListener('submit', function (event) {
+var pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/gi;
+var pwText = document.querySelector('.pw-text');
+var nameErr = document.getElementById('name-error');
+var emailErr = document.getElementById('email-error');
+var pwErr = document.getElementById('password-error');
+var passErr = document.getElementById('confirm-password-error');
+var errMsg = document.querySelector('.error-msg');
+registerForm && registerForm.addEventListener('submit', function (event) {
   //validation
   event.preventDefault(); // Name
 
@@ -64,62 +72,115 @@ registerForm.addEventListener('submit', function (event) {
 
   passwordValidation(); // Password confirmation
 
-  var passErr = document.getElementById('confirm-password-error');
+  passwordConfirmation();
+}); // Name validation function
 
-  if (userPassword.value === userConfirmPassword.value) {
-    passErr.classList.add('d-none');
+function nameValidation() {
+  var nameErr = document.getElementById('name-error');
+
+  if (userName.value === '') {
+    nameErr.classList.remove('hide');
+    nameErr.innerHTML = 'Please fill out this field.';
+    userName.style.borderColor = 'tomato';
   } else {
-    passErr.classList.remove('d-none');
+    nameErr.classList.add('hide');
+    userName.style.borderColor = '';
   }
-});
+}
+
+; // Email validation function
 
 function emailValidation() {
   var emailErr = document.getElementById('email-error');
 
   if (userEmail.value === '') {
-    emailErr.classList.remove('d-none');
+    emailErr.classList.remove('hide');
     emailErr.innerHTML = 'Please fill out this field.';
+    userEmail.style.borderColor = 'tomato';
   } else if (userEmail.value.match(emailRegex)) {
-    emailErr.classList.add('d-none');
+    emailErr.classList.add('hide');
+    userEmail.style.borderColor = '';
   } else {
-    emailErr.classList.remove('d-none');
+    emailErr.classList.remove('hide');
     emailErr.innerHTML = 'Email is not valid';
+    userEmail.style.borderColor = 'tomato';
   }
 }
 
-;
+; // Password validation function
 
 function passwordValidation() {
   var pwErr = document.getElementById('password-error');
-  console.log('first', pwErr);
 
   if (userPassword.value === '') {
-    pwErr.classList.remove('d-none');
+    pwErr.classList.remove('hide');
     pwErr.innerHTML = 'Please fill out this field.';
+    userPassword.style.borderColor = 'tomato';
+    pwText.classList.remove('hide');
   } else if (userPassword.value.match(pwRegex)) {
-    pwErr.classList.add('d-none');
+    pwErr.classList.add('hide');
+    userPassword.style.borderColor = '';
+    pwText.classList.add('hide');
   } else {
-    console.log('second', pwErr);
-    pwErr.classList.remove('d-none');
-    pwErr.innerHTML = 'Your password must contain at least 8 characters, one numeric character, one special character, uppercase and lowercase letters';
+    pwErr.classList.remove('hide');
+    pwErr.innerHTML = 'Password not valid';
+    userPassword.style.borderColor = 'tomato';
+    pwText.classList.remove('hide');
+  }
+}
+
+; // Password confirmation function
+
+function passwordConfirmation() {
+  var passErr = document.getElementById('confirm-password-error');
+
+  if (userConfirmPassword.value === '') {
+    passErr.classList.remove('hide');
+    passErr.innerHTML = 'Please fill out this field.';
+    userConfirmPassword.style.borderColor = 'tomato';
+  } else if (userPassword.value === userConfirmPassword.value) {
+    passErr.classList.add('hide');
+    userConfirmPassword.style.borderColor = '';
+  } else {
+    passErr.classList.remove('hide');
+    userConfirmPassword.style.borderColor = 'tomato';
+    passErr.innerHTML = 'Password confirmation does not match';
   }
 }
 
 ;
+userName && userName.addEventListener('focus', function (event) {
+  //validation
+  event.preventDefault();
+  nameErr.classList.add('hide');
+  userName.style.borderColor = '';
+});
+userEmail && userEmail.addEventListener('focus', function (event) {
+  //validation
+  event.preventDefault();
+  emailErr.classList.add('hide');
+  userEmail.style.borderColor = '';
+});
+userPassword && userPassword.addEventListener('focus', function (event) {
+  //validation
+  event.preventDefault();
+  pwErr.classList.add('hide');
+  userPassword.style.borderColor = '';
+});
+userConfirmPassword && userConfirmPassword.addEventListener('focus', function (event) {
+  //validation
+  event.preventDefault();
+  passErr.classList.add('hide');
+  userConfirmPassword.style.borderColor = '';
+}); // Hamburger Menu
 
-function nameValidation() {
-  var nameErr = document.getElementById('name-error');
-  console.log(nameErr);
-
-  if (userName.value === '') {
-    nameErr.classList.remove('d-none');
-    nameErr.innerHTML = 'Please fill out this field.';
-  } else {
-    nameErr.classList.add('d-none');
-  }
+function toggleMenu() {
+  var getMenu = document.querySelector(".main-menu");
+  getMenu.classList.toggle("hamburger");
 }
 
-; // jquery
+var getHamburger = document.getElementById("toggle-bar");
+getHamburger.addEventListener("click", toggleMenu); // jquery
 
 /*
 const jquserPassword = $('#password');

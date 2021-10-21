@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <title>{{ config('app.name') }}</title>
-
+        <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
         <link
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
             rel="stylesheet"
@@ -29,22 +29,23 @@
         
     >
         <header class="d-flex flex-row header">
+       
             <a href="/"><img
                 src="https://studio.code.org/media?u=https%3A%2F%2Fanimalcrossingworld.com%2Fwp-content%2Fuploads%2F2019%2F08%2Fanimal-crossing-pocket-camp-how-to-get-wood.png"
                 alt="Logo picture"
                 class="logo"
             /></a>
-            <div class="navbar d-flex">
-                <a class="register" id="registerButton" href="#register"
-                    >Register</a
-                >
-                <a
-                    class="login"
-                    id="loginButton"
-                    href="#login"
-                    id="change_login"
-                    >Login</a
-                >
+            <div class="navbar">
+                
+                    <h1 id="toggle-bar">
+                        ☰
+                    </h1>
+                
+                <ul class="main-menu">
+                    <li><a class="register" id="registerButton" href="#register"
+                    >Register</a></li>
+                    <li><a class="login" id="loginButton" href="#login" id="change_login">Login</a></li>
+                </ul>
             </div>
         </header>
         @yield('content')

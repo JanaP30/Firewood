@@ -11363,6 +11363,10 @@ header {
   text-transform: uppercase;
 }
 
+.main-menu li {
+  display: inline-block;
+}
+
 .logo {
   height: 100px;
 }
@@ -11408,6 +11412,20 @@ footer p {
 .error-msg {
   font-size: 14px;
   color: tomato;
+  transition: all 0.5s;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.hide-pw {
+  display: none;
+}
+
+.pw-text {
+  color: tomato;
+  transition: all 0.5s;
 }
 
 .btn-form {
@@ -11416,4 +11434,28 @@ footer p {
 
 .btn-form:hover {
   color: #fff;
+}
+
+#toggle-bar {
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .main-menu {
+    display: none;
+  }
+
+  .main-menu.hamburger {
+    display: block;
+  }
+}
+@media (min-width: 769px) {
+  .main-menu {
+    display: initial;
+  }
+
+  #toggle-bar {
+    display: none;
+  }
 }

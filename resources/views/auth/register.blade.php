@@ -10,51 +10,50 @@
                     {{ __('Register') }}
                 </div>
                 <div class="card-body">
-                    <form novalidate id="register-form" method="POST" action="{{ route('register') }}"> 
-                        <form action="#" id="register-form">
-                            <div class="row">
-                                <div class="col-12 col-lg-6 mt-4">
-                                    <label for="name" class="">{{ __('Name*') }}</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
-                                    <span class="error-msg d-none" id="name-error">Name is not valid</span>
-                                    @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12 col-lg-6 mt-4">
-                                     <label for="email" class="#">{{ __('E-Mail Address*') }}</label>
-                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                                     <span class="error-msg d-none" id="email-error">Email is not valid</span>
-                                     @error('email')
-                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                     </span>
-                                     @enderror
-                                </div>
-                                <div class="col-12 col-lg-6 mt-4">
-                                    <label for="password" class="">{{ __('Password*') }}</label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                    <span class="error-msg d-none" id="password-error">Password is not valid</span>
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12 col-lg-6 mt-4">
-                                    <label for="password-confirm" class="">{{ __('Confirm Password*') }}</label>
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                    <span class="error-msg d-none" id="confirm-password-error">Password confirmation does not match</span>
-                                </div>
-                                <div class="col-12 mt-4 offset-5">
-                                    <button type="submit" class="btn btn-primary btn-form" >
-                                        {{ __('Register') }}
-                                    </button>
-                                </div>
+                    <form novalidate action="#" id="register-form">
+                        <div class="row">
+                            <p class="pw-text hide">Pw requirements: Your password must contain at least 8 characters, one numeric character, one special character, one uppercase letter and one lowercase letter.</p>
+                            <div class="col-12 col-lg-6 mt-4">
+                                <label for="name" class="">{{ __('Name*') }}</label>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" >
+                                <span class="error-msg hide" id="name-error">Name is not valid</span>
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
-                        </form>
+                            <div class="col-12 col-lg-6 mt-4">
+                                    <label for="email" class="#">{{ __('E-Mail Address*') }}</label>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <span class="error-msg hide" id="email-error">Email is not valid</span>
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                            </div>
+                            <div class="col-12 col-lg-6 mt-4">
+                                <label for="password" class="">{{ __('Password*') }}</label>
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <span class="error-msg hide" id="password-error">Password is not valid</span>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="col-12 col-lg-6 mt-4">
+                                <label for="password-confirm" class="">{{ __('Confirm Password*') }}</label>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <span class="error-msg hide" id="confirm-password-error">Password confirmation does not match</span>
+                            </div>
+                            <div class="col-12 mt-4 d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-form" >
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

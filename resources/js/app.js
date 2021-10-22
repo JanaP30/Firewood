@@ -51,10 +51,10 @@ const { Input } = require("postcss");
 //   }  
 
 const userName = document.getElementById('name');
+const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
 
 const userEmail = document.getElementById('email');
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
-
 
 const userPassword = document.getElementById('password');
 const userConfirmPassword = document.getElementById('password-confirm');
@@ -93,9 +93,13 @@ function nameValidation() {
         nameErr.classList.remove('hide');
         nameErr.innerHTML= 'Please fill out this field.';
         userName.style.borderColor = 'tomato';
-    } else {
+    } else if (userName.value.match(nameRegex)) {
         nameErr.classList.add('hide');
         userName.style.borderColor = '';
+    } else {
+        nameErr.classList.remove('hide');
+        nameErr.innerHTML= 'Name is not valid';
+        userName.style.borderColor = 'tomato';
     }
 };
 
@@ -116,7 +120,6 @@ function emailValidation() {
         userEmail.style.borderColor = 'tomato';
     }
 };
-
 
 
 // Password validation function
@@ -186,16 +189,15 @@ userConfirmPassword && userConfirmPassword.addEventListener('focus', function(ev
 });
 
 
-// Hamburger Menu
+// Hamburger menu
 
-function toggleMenu() {
-    const getMenu = document.querySelector(".main-menu");
-    getMenu.classList.toggle("hamburger");
-}
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
 
-const getHamburger = document.getElementById("toggle-bar");
-
-getHamburger.addEventListener("click", toggleMenu); 
+hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
 
 
     // jquery

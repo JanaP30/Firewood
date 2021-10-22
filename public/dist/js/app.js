@@ -50,6 +50,7 @@ var _require = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/po
 
 
 var userName = document.getElementById('name');
+var nameRegex = /^[ a-zA-Z\-\’]+$/gi;
 var userEmail = document.getElementById('email');
 var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
 var userPassword = document.getElementById('password');
@@ -82,9 +83,13 @@ function nameValidation() {
     nameErr.classList.remove('hide');
     nameErr.innerHTML = 'Please fill out this field.';
     userName.style.borderColor = 'tomato';
-  } else {
+  } else if (userName.value.match(nameRegex)) {
     nameErr.classList.add('hide');
     userName.style.borderColor = '';
+  } else {
+    nameErr.classList.remove('hide');
+    nameErr.innerHTML = 'Name is not valid';
+    userName.style.borderColor = 'tomato';
   }
 }
 
@@ -172,15 +177,14 @@ userConfirmPassword && userConfirmPassword.addEventListener('focus', function (e
   event.preventDefault();
   passErr.classList.add('hide');
   userConfirmPassword.style.borderColor = '';
-}); // Hamburger Menu
+}); // Hamburger menu
 
-function toggleMenu() {
-  var getMenu = document.querySelector(".main-menu");
-  getMenu.classList.toggle("hamburger");
-}
-
-var getHamburger = document.getElementById("toggle-bar");
-getHamburger.addEventListener("click", toggleMenu); // jquery
+var hamburger = document.getElementById('hamburger');
+var navMenu = document.getElementById('nav-menu');
+hamburger.addEventListener('click', function () {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
+}); // jquery
 
 /*
 const jquserPassword = $('#password');

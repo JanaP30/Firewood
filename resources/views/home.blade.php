@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 col-lg-6 py-5">
                 <div class="centered-box">
-                    <h1 class="landing-heading">Firewood</h1>
+                    <h1 class="landing-heading"><span>Fire</span>wood</h1>
                     <p class="landing-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, repudiandae voluptas pariatur odit quo consequuntur. Praesentium hic nulla enim, nesciunt reprehenderit quos, fugit mollitia molestias culpa minima. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, repudiandae voluptas.</p>
                     <a href="/order/create" class="landing-btn btn">ORDER</a>
                 </div>

@@ -23,4 +23,9 @@ class Product extends Model
     {
         return $this->belongsToMany(ProductType::class)->withPivot('quantity');
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

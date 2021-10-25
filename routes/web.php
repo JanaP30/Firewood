@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PrintoutOfOrders;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,6 @@ Route::get('products/delete/{id}', [App\Http\Controllers\CategoryController::cla
 Route::get('order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
 Route::get('order/create', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
 Route::get('order/approved/{id}', [App\Http\Controllers\OrderController::class, 'approved'])->name('order.approved');
+
+Route::get('order/printout-of-order', [PrintoutOfOrders::class, 'index'])->name('printoutOfOrders.index');
 

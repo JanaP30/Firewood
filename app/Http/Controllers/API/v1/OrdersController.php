@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -46,4 +47,13 @@ class OrdersController extends Controller
         }
         
     }
+
+    public function getOrders(){
+        $orders = Order::all();
+        $data = [
+            'orders' => $orders
+        ];
+
+        return response()->json($data, 200);
+}
 }

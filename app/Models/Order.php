@@ -25,28 +25,49 @@ class Order extends Model
 
     ];
 
-        public static $_ORDER_PENDING=1;
-        public static $_ORDER_APPROVED=2;
+        public static $_WOOD_PRODUCT_CHOPPED=1;
+        public static $_WOOD_PRODUCT_WHOLE=2;
+        public static $_WOOD_PRODUCT_TYPE_BEECH=3;
+        public static $_WOOD_PRODUCT_TYPE_OAK=4;
+        public static $_WOOD_PRODUCT_TYPE_ROSEWOOD=5;
+        public static $_WOOD_PRODUCT_TYPE_BIRCH=6;
 
 
-        public static function getStatuses()
+        public static function getWoods()
         {
                 return [
 
-                    Order::$_ORDER_PENDING=>'Pending',
-                    Order::$_ORDER_APPROVED=>'Approved'
+                    self::$_WOOD_PRODUCT_CHOPPED=>'Chopped',
+                    self::$_WOOD_PRODUCT_WHOLE=>'Whole',
+                    self::$_WOOD_PRODUCT_TYPE_BEECH=>'Beech',
+                    self::$_WOOD_PRODUCT_TYPE_OAK=>'Oak',
+                    self::$_WOOD_PRODUCT_TYPE_ROSEWOOD=>'Rosewood',
+                    self::$_WOOD_PRODUCT_TYPE_BIRCH=>'Birch'
 
                 ];
 
         }
         
-        public function getStatus()
+        public function getWood()
         {
-            return Order::getStatuses()[$this->order];
+            return self::getWoods()[$this->wood];
 
 
         }
+        
+        public function productType(){
 
+          return $this->belongsTo(ProductType::class);
+
+
+        }
+        public function product(){
+
+            return $this->belongsTo(Product::class);
+  
+  
+          }
+        
 
 
 

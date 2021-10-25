@@ -35,7 +35,10 @@
                     class="logo"/></a>
                 <ul class="nav-menu" id="nav-menu">
                     <li class="nav-item">
-                        <a class="register nav-link" id="registerButton" href="#register">Register</a>
+                        <a class="order nav-link" id="orderButton" href="/order">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="register nav-link" id="registerButton" href="/register">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="login nav-link" id="loginButton" href="#login" id="change_login">Login</a>

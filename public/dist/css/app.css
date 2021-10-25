@@ -11330,7 +11330,7 @@ textarea.form-control-lg {
   text-align: center;
   color: #c00101;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 5px;
   border: 1px solid #c00101;
   background-color: rgba(192, 1, 1, 0);
   padding: 10px 30px;
@@ -11356,7 +11356,7 @@ textarea.form-control-lg {
 }
 
 .logo {
-  height: 100px;
+  height: 80px;
 }
 
 li {
@@ -11369,6 +11369,7 @@ a {
 
 header {
   border-bottom: 1px solid #E2E8F0;
+  height: 100px;
 }
 
 .navbar {
@@ -11517,4 +11518,24 @@ footer p {
 
 .fa-times {
   color: #fff;
+}
+
+.btn-primary {
+  text-align: center;
+  color: #c00101 !important;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid #c00101 !important;
+  background-color: rgba(192, 1, 1, 0) !important;
+  padding: 10px 30px;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.btn-primary:hover {
+  color: #fff !important;
+  background-color: #c00101 !important;
+  border: 1px solid #c00101 !important;
+  border-radius: 5px;
 }

@@ -1,4 +1,6 @@
-'use strict';
+import axios from "axios";
+
+console.log(axios);
 
 // /**
 //  * First we will load all of this project's JavaScript dependencies which
@@ -209,3 +211,35 @@ $('#register-form').on('submit', function(event) {
     event.preventDefault();
     $(this).css({background: 'red'});
 })*/
+
+// AJAX/AXIOS
+
+// napraviti async function koji vraca ordere i koristi await I try/catch blokove
+
+
+axios.get('http://9044-77-78-203-194.ngrok.io/api/v1/get-orders', {
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+})
+    .then(response => {
+        console.log(response.data);
+        
+    })
+    .catch(error => {
+        console.log(error);
+    })
+   
+/*
+    async function getOrders() {
+        try {
+            const order = await axios('https://run.mocky.io/v3/3001e677-ecda-4ba0-ba61-4e7077648a54');
+            console.log(order);
+        } catch(err) {
+            alert(err);
+        }
+    }
+
+    getOrders();
+    */

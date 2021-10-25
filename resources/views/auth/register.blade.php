@@ -49,7 +49,7 @@
                                 <span class="error-msg hide" id="confirm-password-error">Password confirmation does not match</span>
                             </div>
                             <div class="col-12 mt-4 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-form" >
+                                <button type="submit" class="btn btn-primary btn-form">
                                     {{ __('Register') }}
                                 </button>
                             </div>

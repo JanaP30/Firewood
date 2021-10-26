@@ -41,7 +41,7 @@
                         <a class="register nav-link" id="registerButton" href="/register">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="login nav-link" id="loginButton" href="#login" id="change_login">Login</a>
+                        <a class="login nav-link" id="loginButton" href="/login" id="change_login">Login</a>
                     </li>
                 </ul>
                 <div class="hamburger" id="hamburger">

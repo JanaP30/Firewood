@@ -22,7 +22,7 @@ Route::post('/store-order', [OrdersController::class, 'store'])->name('order.sto
 Route::get('/success/{id}', [OrdersController::class, 'success']);    
 
 
-// Auth::routes();
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

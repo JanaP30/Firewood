@@ -11531,6 +11531,7 @@ footer p {
   position: relative;
   transition: all 0.4s ease-in-out;
   font-family: "Ubuntu", sans-serif;
+  text-transform: uppercase;
 }
 
 .btn-primary:hover {

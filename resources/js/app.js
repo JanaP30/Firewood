@@ -1,6 +1,7 @@
 import axios from "axios";
+import { data } from "jquery";
 
-console.log(axios);
+
 
 // /**
 //  * First we will load all of this project's JavaScript dependencies which
@@ -61,7 +62,7 @@ const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
 const userPassword = document.getElementById('password');
 const userConfirmPassword = document.getElementById('password-confirm');
 const registerForm = document.getElementById('register-form');
-const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/gi;
+const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
 const pwText = document.querySelector('.pw-text');
 
 const nameErr = document.getElementById('name-error');
@@ -85,8 +86,21 @@ registerForm && registerForm.addEventListener('submit', function(event) {
     
     // Password confirmation
     passwordConfirmation();
-   
 });
+
+const loginForm = document.getElementById('login-form');
+
+loginForm && loginForm.addEventListener('submit', function(event) {
+    //validation
+    event.preventDefault();
+
+    // Email validation
+    emailValidation();
+
+    // Password validation
+    passwordValidation();
+  });
+
 
 // Name validation function
 function nameValidation() {
@@ -217,20 +231,41 @@ $('#register-form').on('submit', function(event) {
 // napraviti async function koji vraca ordere i koristi await I try/catch blokove
 
 
-axios.get('http://9044-77-78-203-194.ngrok.io/api/v1/get-orders', {
+
+const orderTable = document.getElementById('order-table');
+const orderTableRow = document.createElement('tr');
+const orderTableCell = document.createElement('td');
+
+axios.get('https://b384-77-78-203-194.ngrok.io/api/v1/get-orders', {
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }
 })
-    .then(response => {
-        console.log(response.data);
-        
-    })
-    .catch(error => {
-        console.log(error);
-    })
-   
+.then(response => {
+    console.log(response.data);
+    for(let i = 0; i < response.data.length; i++) {
+        const orderTable = document.getElementById('order-table');
+        const orderTableRow = document.createElement('tr');
+        orderTable.appendChild(orderTableRow);
+        for (let i = 0; i < 8; i++) {
+            const orderTableCell = document.createElement('td');
+            orderTableRow.appendChild(orderTableCell);
+            orderTableCell.innerHTML = response.data.first_name;
+
+        }
+    }
+})
+.catch(error => {
+    console.log(error);
+});
+
+
+
+
+    /************************/
+    
+
 /*
     async function getOrders() {
         try {
@@ -243,3 +278,5 @@ axios.get('http://9044-77-78-203-194.ngrok.io/api/v1/get-orders', {
 
     getOrders();
     */
+
+   

@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\ProductType;
 use App\Models\Product;
 use App\Models\ProductProductType;
+use App\Repositories\Orders\OrdersService;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
@@ -22,9 +23,13 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $order = Order::get();
+        $response = OrdersService::getOrders();
+        if(!$response->success){
+            return back()->withErrors(['Failed to fetch orders']);
+        }
+
         $data = [
-            'order'=>$order
+            'order'=> $response->data['orders']
             
         ];
         return view('order.index', $data);

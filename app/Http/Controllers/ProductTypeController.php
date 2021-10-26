@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
 
-class TypeOfWoodController extends Controller
+class ProductTypeController extends Controller
 {
     /**
      * Display a listing of the resource.

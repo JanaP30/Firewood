@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function(){
 
     Route::get('check-qty', [OrdersController::class, 'getCheckQty']);
     Route::get('get-products', [ProductController::class, 'getProducts']);
-    Route::get('get-productTypes', [ProductController::class, 'getProductTypes']);
+    Route::get('get-product-types', [ProductController::class, 'getProductTypes']);
     Route::get('get-orders', [OrdersController::class, 'getOrders']);
 
 });

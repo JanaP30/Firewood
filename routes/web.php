@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PrintoutOfOrders;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,28 +24,27 @@ Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
 Route::post('/store-order', [OrdersController::class, 'store'])->name('order.store');
 Route::get('/success/{id}', [OrdersController::class, 'success']);    
 
-
-// Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 //ProductType route
-Route::get('product-type/', [App\Http\Controllers\ProductTypeController::class, 'index'])->name('productType.index');
-Route::get('product-type/create', [App\Http\Controllers\ProductTypeController::class, 'create'])->name('productType.create');
-Route::post('product-type/update/{id}', [App\Http\Controllers\ProductTypeController::class, 'update'])->name('productType.update');
-Route::get('product-type/delete/{id}', [App\Http\Controllers\ProductTypeController::class, 'delete'])->name('productType.delete');
+Route::get('product-type/', [ProductTypeController::class, 'index'])->name('productType.index');
+Route::get('product-type/create', [ProductTypeController::class, 'create'])->name('productType.create');
+Route::post('product-type/update/{id}', [ProductTypeController::class, 'update'])->name('productType.update');
+Route::get('product-type/delete/{id}', [ProductTypeController::class, 'delete'])->name('productType.delete');
 
 //Category route
-Route::get('products/', [App\Http\Controllers\CategoryController::class, 'index'])->name('products.index');
-Route::get('products/create', [App\Http\Controllers\CategoryController::class, 'create'])->name('products.create');
-Route::post('products/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('products.update');
-Route::get('products/delete/{id}', [App\Http\Controllers\CategoryController::class, 'delete'])->name('products.delete');
+Route::get('products/', [ProductController::class, 'index'])->name('products.index');
+Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('products/update/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::get('products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
 
 //Order route
-Route::get('order/', [App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
-Route::get('order/create', [App\Http\Controllers\OrderController::class, 'create'])->name('order.create');
-Route::get('order/approved/{id}', [App\Http\Controllers\OrderController::class, 'approved'])->name('order.approved');
+Route::get('order/', [OrdersController::class, 'index'])->name('order.index');
+Route::get('order/create', [OrdersController::class, 'create'])->name('order.create');
+Route::get('order/approved/{id}', [OrdersController::class, 'approved'])->name('order.approved');
 
 Route::get('order/printout-of-order', [PrintoutOfOrders::class, 'index'])->name('printoutOfOrders.index');
 

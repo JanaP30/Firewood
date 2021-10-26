@@ -49,11 +49,14 @@ class OrdersController extends Controller
     }
 
     public function getOrders(){
-        $orders = Order::all();
-        $data = [
-            'orders' => $orders
-        ];
+       $data['orders'] = Order::all();
+         
 
-        return response()->json($data, 200);
+        if (!$data){
+
+            response()->json($data, 200);
+        }
+            
+        return $data;
 }
 }

@@ -22,18 +22,18 @@
                                     <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                            </div>
-                            <div class="col-12 col-lg-12 mt-4">
-                                <label for="password" class="">{{ __('Password*') }}</label>
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                                <span class="error-msg hide" id="password-error">Password is not valid</span>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            
+                                </div>
+                                <div class="col-12 col-lg-12 mt-4">
+                                    <label for="password" class="">{{ __('Password*') }}</label>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <span class="error-msg hide" id="password-error">Password is not valid</span>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                
                             <div class="col-12 mt-4 d-flex justify-content-center">
                                 <button type="submit" class="btn btn-primary btn-form">
                                     {{ __('Log In') }}

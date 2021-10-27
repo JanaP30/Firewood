@@ -1,7 +1,8 @@
 import axios from "axios";
 import { data } from "jquery";
+import { config } from './config.js';
 
-
+console.log(config);
 
 // /**
 //  * First we will load all of this project's JavaScript dependencies which
@@ -230,29 +231,71 @@ $('#register-form').on('submit', function(event) {
 
 // napraviti async function koji vraca ordere i koristi await I try/catch blokove
 
+// AXIOS ORDERS
 
-
-const orderTable = document.getElementById('order-table');
-const orderTableRow = document.createElement('tr');
-const orderTableCell = document.createElement('td');
-
-axios.get('https://b384-77-78-203-194.ngrok.io/api/v1/get-orders', {
+axios.get(`${config.baseURL}/api/v1/get-orders`, {
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }
 })
 .then(response => {
-    console.log(response.data);
-    for(let i = 0; i < response.data.length; i++) {
+    // for (let i = 0; i < response.data.orders.length; i++) {
+    //     const orderTable = document.getElementById('order-table');
+    //     const orderTableRow = document.createElement('tr');
+    //     orderTableRow.style.backgroundColor = 'red';
+    //     orderTable.appendChild(orderTableRow);
+    //     Object.keys(response.data.orders[i]).forEach(key) => {
+    //       const orderTableCell = document.createElement('td');
+    //       orderTableCell.innerHTML = response.data.orders[i][key];
+    //       orderTableRow.appendChild(orderTableCell);
+    //     });
+    // }
+    const loader = document.getElementById('loader');
+    loader.classList.add('hide');
+    for (let i = 0; i < response.data.orders.length; i++) {
         const orderTable = document.getElementById('order-table');
+        orderTable.classList.remove('hide');
         const orderTableRow = document.createElement('tr');
+        orderTableRow.classList.add('tr');
         orderTable.appendChild(orderTableRow);
-        for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 9; j++) {
             const orderTableCell = document.createElement('td');
+            orderTableCell.classList.add('td');
+            switch(j) {
+                case 0:
+                    orderTableCell.innerHTML = response.data.orders[i].id;
+                    break;
+                case 1:
+                    orderTableCell.innerHTML = response.data.orders[i].first_name;
+                    break;
+                case 2:
+                    orderTableCell.innerHTML = response.data.orders[i].last_name;
+                    break;
+                case 3:
+                    orderTableCell.innerHTML = response.data.orders[i].address;
+                    break;
+                case 4:
+                    orderTableCell.innerHTML = response.data.orders[i].phone_number;
+                    break;
+                case 5:
+                    orderTableCell.innerHTML = response.data.orders[i].product_type_id;
+                    break;
+                case 6:
+                    orderTableCell.innerHTML = response.data.orders[i].product_id;
+                    break;
+                case 7:
+                    orderTableCell.innerHTML = response.data.orders[i].quantity;
+                    break;
+                case 8:
+                    const date = new Date(response.data.orders[i].created_at);
+                    const dateString = ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth()+1)).slice(-2) + '.' + date.getFullYear() + '. ' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
+                    orderTableCell.innerHTML = dateString;
+                    break;
+                default:
+             }
             orderTableRow.appendChild(orderTableCell);
-            orderTableCell.innerHTML = response.data.first_name;
-
+            // orderTableCell.innerHTML = response.data.first_name;
         }
     }
 })
@@ -261,6 +304,16 @@ axios.get('https://b384-77-78-203-194.ngrok.io/api/v1/get-orders', {
 });
 
 
+
+
+// AXIOS REGISTER
+
+
+
+
+
+
+// AXIOS LOG IN
 
 
     /************************/
@@ -279,4 +332,14 @@ axios.get('https://b384-77-78-203-194.ngrok.io/api/v1/get-orders', {
     getOrders();
     */
 
-   
+    /*
+    if (j === 0) {
+        orderTableCell.innerHTML = response.data.orders[i].id
+    }
+    if (j === 1) {
+        orderTableCell.innerHTML = response.data.orders[i].first_name
+    }
+    */
+
+
+ 

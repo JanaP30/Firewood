@@ -2066,8 +2066,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config.js */ "./resources/js/config.js");
 
- // /**
+
+
+console.log(_config_js__WEBPACK_IMPORTED_MODULE_2__.config); // /**
 //  * First we will load all of this project's JavaScript dependencies which
 //  * includes Vue and other libraries. It is a great starting point when
 //  * building robust, powerful web applications using Vue and Laravel.
@@ -2264,36 +2267,89 @@ $('#register-form').on('submit', function(event) {
 })*/
 // AJAX/AXIOS
 // napraviti async function koji vraca ordere i koristi await I try/catch blokove
+// AXIOS ORDERS
 
-var orderTable = document.getElementById('order-table');
-var orderTableRow = document.createElement('tr');
-var orderTableCell = document.createElement('td');
-axios__WEBPACK_IMPORTED_MODULE_0___default().get('https://b384-77-78-203-194.ngrok.io/api/v1/get-orders', {
+axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/get-orders"), {
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   }
 }).then(function (response) {
-  console.log(response.data);
+  // for (let i = 0; i < response.data.orders.length; i++) {
+  //     const orderTable = document.getElementById('order-table');
+  //     const orderTableRow = document.createElement('tr');
+  //     orderTableRow.style.backgroundColor = 'red';
+  //     orderTable.appendChild(orderTableRow);
+  //     Object.keys(response.data.orders[i]).forEach(key) => {
+  //       const orderTableCell = document.createElement('td');
+  //       orderTableCell.innerHTML = response.data.orders[i][key];
+  //       orderTableRow.appendChild(orderTableCell);
+  //     });
+  // }
+  var loader = document.getElementById('loader');
+  loader.classList.add('hide');
 
-  for (var i = 0; i < response.data.length; i++) {
-    var _orderTable = document.getElementById('order-table');
+  for (var i = 0; i < response.data.orders.length; i++) {
+    var orderTable = document.getElementById('order-table');
+    orderTable.classList.remove('hide');
+    var orderTableRow = document.createElement('tr');
+    orderTableRow.classList.add('tr');
+    orderTable.appendChild(orderTableRow);
 
-    var _orderTableRow = document.createElement('tr');
+    for (var j = 0; j < 9; j++) {
+      var orderTableCell = document.createElement('td');
+      orderTableCell.classList.add('td');
 
-    _orderTable.appendChild(_orderTableRow);
+      switch (j) {
+        case 0:
+          orderTableCell.innerHTML = response.data.orders[i].id;
+          break;
 
-    for (var _i = 0; _i < 8; _i++) {
-      var _orderTableCell = document.createElement('td');
+        case 1:
+          orderTableCell.innerHTML = response.data.orders[i].first_name;
+          break;
 
-      _orderTableRow.appendChild(_orderTableCell);
+        case 2:
+          orderTableCell.innerHTML = response.data.orders[i].last_name;
+          break;
 
-      _orderTableCell.innerHTML = response.data.first_name;
+        case 3:
+          orderTableCell.innerHTML = response.data.orders[i].address;
+          break;
+
+        case 4:
+          orderTableCell.innerHTML = response.data.orders[i].phone_number;
+          break;
+
+        case 5:
+          orderTableCell.innerHTML = response.data.orders[i].product_type_id;
+          break;
+
+        case 6:
+          orderTableCell.innerHTML = response.data.orders[i].product_id;
+          break;
+
+        case 7:
+          orderTableCell.innerHTML = response.data.orders[i].quantity;
+          break;
+
+        case 8:
+          var date = new Date(response.data.orders[i].created_at);
+          var dateString = ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2) + '.' + date.getFullYear() + '. ' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
+          orderTableCell.innerHTML = dateString;
+          break;
+
+        default:
+      }
+
+      orderTableRow.appendChild(orderTableCell); // orderTableCell.innerHTML = response.data.first_name;
     }
   }
 })["catch"](function (error) {
   console.log(error);
-});
+}); // AXIOS REGISTER
+// AXIOS LOG IN
+
 /************************/
 
 /*
@@ -2308,6 +2364,33 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().get('https://b384-77-78-203-194.ngr
 
     getOrders();
     */
+
+/*
+if (j === 0) {
+    orderTableCell.innerHTML = response.data.orders[i].id
+}
+if (j === 1) {
+    orderTableCell.innerHTML = response.data.orders[i].first_name
+}
+*/
+
+/***/ }),
+
+/***/ "./resources/js/config.js":
+/*!********************************!*\
+  !*** ./resources/js/config.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "config": () => (/* binding */ config)
+/* harmony export */ });
+var config = {
+  baseURL: 'https://3f44-77-78-203-194.ngrok.io'
+};
+
 
 /***/ }),
 

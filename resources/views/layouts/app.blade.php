@@ -26,36 +26,36 @@
     </head>
     <body
         class="d-flex flex-column">
-
-        <header class="header">
-            <nav class="navbar" id="navbar">
-                <a href="/"><img
-                    src="https://studio.code.org/media?u=https%3A%2F%2Fanimalcrossingworld.com%2Fwp-content%2Fuploads%2F2019%2F08%2Fanimal-crossing-pocket-camp-how-to-get-wood.png"
-                    alt="Logo picture"
-                    class="logo"/></a>
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item">
-                        <a class="order nav-link" id="orderButton" href="/order">Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="register nav-link" id="registerButton" href="/register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="login nav-link" id="loginButton" href="/login" id="change_login">Login</a>
-                    </li>
-                </ul>
-                <div class="hamburger" id="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </nav>
-        </header>
-        @yield('content')
-        <footer class="d-flex flex-column footer">
-            <div class="d-flex flex-column">
-                <p>Copyrights 2021 &copy; All rights reserved.</p>   
+ <header class="header">
+        <nav class="navbar" id="navbar">
+            <a href="/"><img
+                src="https://studio.code.org/media?u=https%3A%2F%2Fanimalcrossingworld.com%2Fwp-content%2Fuploads%2F2019%2F08%2Fanimal-crossing-pocket-camp-how-to-get-wood.png"
+                alt="Logo picture"
+                class="logo"/></a>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a class="order nav-link" id="orderButton" href="/order">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="register nav-link" id="registerButton" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="login nav-link" id="loginButton" href="/login" id="change_login">Log in</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </footer>
+        </nav>
+    </header>
+    @yield('content')
+    <footer class="d-flex flex-column footer">
+        <div class="d-flex flex-column">
+            <p>Copyrights 2021 &copy; All rights reserved.</p>   
+        </div>
+    </footer>
+
     </body>
 </html>

@@ -2342,13 +2342,32 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(_config_js__WEBPACK_I
         default:
       }
 
-      orderTableRow.appendChild(orderTableCell); // orderTableCell.innerHTML = response.data.first_name;
+      orderTableRow.appendChild(orderTableCell);
     }
   }
 })["catch"](function (error) {
   console.log(error);
-}); // AXIOS REGISTER
-// AXIOS LOG IN
+}); // REGISTER
+// LOG IN axios
+// slusamo event na login dugmetu
+// pokupimo vrijednosti sa inputa
+// validacija
+// submitamo vrijednosti
+// success: redirect /home
+// error: ipisati error
+
+/*
+const loginBtn = document.getElementById('login-btn');
+loginBtn.addEventListener('submit', function (e) {
+    const mailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    if (mailInput.value.match(emailValidation) && passwordInput.value.match(passwordValidation)) {
+        console.log('success');
+    } else {
+        console.log('error');
+    }
+});
+*/
 
 /************************/
 
@@ -2388,7 +2407,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "config": () => (/* binding */ config)
 /* harmony export */ });
 var config = {
-  baseURL: 'https://3f44-77-78-203-194.ngrok.io'
+  baseURL: 'https://02a2-77-78-203-194.ngrok.io'
 };
 
 

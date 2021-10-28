@@ -91,6 +91,7 @@ registerForm && registerForm.addEventListener('submit', function(event) {
 
 const loginForm = document.getElementById('login-form');
 
+
 loginForm && loginForm.addEventListener('submit', function(event) {
     //validation
     event.preventDefault();
@@ -100,6 +101,9 @@ loginForm && loginForm.addEventListener('submit', function(event) {
 
     // Password validation
     passwordValidation();
+
+    
+  
   });
 
 
@@ -240,6 +244,7 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
     }
 })
 .then(response => {
+   
     // for (let i = 0; i < response.data.orders.length; i++) {
     //     const orderTable = document.getElementById('order-table');
     //     const orderTableRow = document.createElement('tr');
@@ -295,7 +300,6 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
                 default:
              }
             orderTableRow.appendChild(orderTableCell);
-            // orderTableCell.innerHTML = response.data.first_name;
         }
     }
 })
@@ -306,17 +310,37 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
 
 
 
-// AXIOS REGISTER
+// REGISTER
 
 
 
 
 
 
-// AXIOS LOG IN
+// LOG IN axios
+
+// slusamo event na login dugmetu
+    // pokupimo vrijednosti sa inputa
+    // validacija
+    // submitamo vrijednosti
+    // success: redirect /home
+    // error: ipisati error
 
 
-    /************************/
+/*
+const loginBtn = document.getElementById('login-btn');
+loginBtn.addEventListener('submit', function (e) {
+    const mailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    if (mailInput.value.match(emailValidation) && passwordInput.value.match(passwordValidation)) {
+        console.log('success');
+    } else {
+        console.log('error');
+    }
+});
+*/
+
+/************************/
     
 
 /*

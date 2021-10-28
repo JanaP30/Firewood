@@ -35,7 +35,7 @@
                                 </div>
                                 
                             <div class="col-12 mt-4 d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary btn-form">
+                                <button type="submit" class="btn btn-primary btn-form" id="login-btn">
                                     {{ __('Log In') }}
                                 </button>
                             </div>

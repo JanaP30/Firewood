@@ -72,22 +72,49 @@ const pwErr = document.getElementById('password-error');
 const passErr = document.getElementById('confirm-password-error');
 const errMsg = document.querySelector('.error-msg');
 
+
+const users = [];
+const usersLogged = []; 
+
+// REGISTER FORM VALIDATION
+
 registerForm && registerForm.addEventListener('submit', function(event) {
     //validation
     event.preventDefault();
 
     // Name
     nameValidation();
+    
    
     // Email validation
     emailValidation();
+    
 
     // Password validation
     passwordValidation();
+  
     
     // Password confirmation
     passwordConfirmation();
+    
+
+
+    const user = {
+        name: userName.value,
+        email: userEmail.value,
+        password: userPassword.value
+    }
+
+    if (nameValidation() && emailValidation() && passwordValidation() && passwordConfirmation) {
+        users.push(user);
+        registerForm.reset();
+    } else {
+        console.log('User data is not valid');
+    }
+        console.log(users);
 });
+
+// LOG IN FORM VALIDATION
 
 const loginForm = document.getElementById('login-form');
 
@@ -102,10 +129,22 @@ loginForm && loginForm.addEventListener('submit', function(event) {
     // Password validation
     passwordValidation();
 
-    
-  
-  });
 
+    const userLogged = {
+        email: userEmail.value,
+        password: userPassword.value
+    }
+
+    if (emailValidation() && passwordValidation()) {
+        usersLogged.push(userLogged);
+        loginForm.reset();
+    } else {
+        console.log('User data is not valid');
+    }
+        console.log(usersLogged);
+});
+
+// VALIDATION FUNCTIONS
 
 // Name validation function
 function nameValidation() {
@@ -114,13 +153,16 @@ function nameValidation() {
         nameErr.classList.remove('hide');
         nameErr.innerHTML= 'Please fill out this field.';
         userName.style.borderColor = 'tomato';
+        return false;
     } else if (userName.value.match(nameRegex)) {
         nameErr.classList.add('hide');
         userName.style.borderColor = '';
+        return true;
     } else {
         nameErr.classList.remove('hide');
         nameErr.innerHTML= 'Name is not valid';
         userName.style.borderColor = 'tomato';
+        return false;
     }
 };
 
@@ -132,13 +174,16 @@ function emailValidation() {
         emailErr.classList.remove('hide');
         emailErr.innerHTML= 'Please fill out this field.';
         userEmail.style.borderColor = 'tomato';
+        return false;
     } else if (userEmail.value.match(emailRegex)) {
         emailErr.classList.add('hide');
         userEmail.style.borderColor = '';
+        return true;
     } else {
         emailErr.classList.remove('hide');
         emailErr.innerHTML= 'Email is not valid';
         userEmail.style.borderColor = 'tomato';
+        return false;
     }
 };
 
@@ -151,15 +196,18 @@ function passwordValidation() {
         pwErr.innerHTML= 'Please fill out this field.';
         userPassword.style.borderColor = 'tomato';
         pwText.classList.remove('hide');
+        return false;
     } else if (userPassword.value.match(pwRegex)) {
         pwErr.classList.add('hide');
         userPassword.style.borderColor = '';
         pwText.classList.add('hide');
+        return true;
     } else {
         pwErr.classList.remove('hide');
         pwErr.innerHTML= 'Password not valid';
         userPassword.style.borderColor = 'tomato';
         pwText.classList.remove('hide');
+        return false;
     }
 };
 
@@ -170,14 +218,17 @@ function passwordConfirmation() {
         passErr.classList.remove('hide');
         passErr.innerHTML= 'Please fill out this field.';
         userConfirmPassword.style.borderColor = 'tomato';
+        return false;
     }
     else if (userPassword.value === userConfirmPassword.value) {
         passErr.classList.add('hide');
         userConfirmPassword.style.borderColor = '';
+        return true;
     } else {
         passErr.classList.remove('hide');
         userConfirmPassword.style.borderColor = 'tomato';
         passErr.innerHTML = 'Password confirmation does not match';
+        return false;
     }
 };
 
@@ -210,7 +261,7 @@ userConfirmPassword && userConfirmPassword.addEventListener('focus', function(ev
 });
 
 
-// Hamburger menu
+// HAMBURGER MENU
 
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
@@ -311,6 +362,9 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
 
 
 // REGISTER
+
+
+
 
 
 

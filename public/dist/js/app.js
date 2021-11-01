@@ -2111,120 +2111,184 @@ var _require = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/po
 //   }  
 
 
-var userName = document.getElementById('name');
+var getId = function getId(elemId) {
+  return document.getElementById(elemId);
+};
+
+var userName = getId('name');
 var nameRegex = /^[ a-zA-Z\-\’]+$/gi;
-var userEmail = document.getElementById('email');
+var userEmail = getId('email');
 var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
-var userPassword = document.getElementById('password');
-var userConfirmPassword = document.getElementById('password-confirm');
-var registerForm = document.getElementById('register-form');
+var userPassword = getId('password');
+var userConfirmPassword = getId('password-confirm');
+var registerForm = getId('register-form');
 var pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
 var pwText = document.querySelector('.pw-text');
-var nameErr = document.getElementById('name-error');
-var emailErr = document.getElementById('email-error');
-var pwErr = document.getElementById('password-error');
-var passErr = document.getElementById('confirm-password-error');
-var errMsg = document.querySelector('.error-msg');
-var users = [];
-var usersLogged = []; // REGISTER FORM VALIDATION
+var nameErr = getId('name-error');
+var emailErr = getId('email-error');
+var pwErr = getId('password-error');
+var passErr = getId('confirm-password-error');
+var errMsg = document.querySelector('.error-msg'); // REGISTER FORM VALIDATION
 
 registerForm && registerForm.addEventListener('submit', function (event) {
-  //validation
-  event.preventDefault(); // Name
+  event.preventDefault();
+  registerValidation(); //axios req
 
-  nameValidation(); // Email validation
-
-  emailValidation(); // Password validation
-
-  passwordValidation(); // Password confirmation
-
-  passwordConfirmation();
-  var user = {
+  var validationErrors = [];
+  var formData = {
     name: userName.value,
     email: userEmail.value,
     password: userPassword.value
   };
 
-  if (nameValidation() && emailValidation() && passwordValidation() && passwordConfirmation) {
-    users.push(user);
-    registerForm.reset();
-  } else {
-    console.log('User data is not valid');
+  if (!validationErrors.length) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/register"), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      data: formData
+    }).then(function (response) {
+      window.location.href = '/login';
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
+});
 
-  console.log(users);
-}); // LOG IN FORM VALIDATION
+function registerValidation() {
+  //validate    
+  var validationErrors = []; // Name validation
 
-var loginForm = document.getElementById('login-form');
+  var nameValid = nameValidation();
+
+  if (!nameValid) {
+    console.log('Name is not valid!');
+    validationErrors.push('Name is not valid!');
+  } // Email validation
+
+
+  var emailValid = emailValidation();
+
+  if (!emailValid) {
+    console.log('Email is not valid!');
+    validationErrors.push('Email is not valid!');
+  } // Password validation
+
+
+  var passwordlValid = passwordValidation();
+
+  if (!passwordlValid) {
+    console.log('Password is not valid!');
+    validationErrors.push('Password is not valid!');
+  } // Password confirmation
+
+
+  var passwordConfirmationValid = passwordConfirmation();
+
+  if (!passwordConfirmationValid) {
+    console.log('Password confirmation is not valid!');
+    validationErrors.push('Password confirmation is not valid!');
+  }
+} // LOG IN FORM VALIDATION
+
+
+var loginForm = getId('login-form');
 loginForm && loginForm.addEventListener('submit', function (event) {
-  //validation
-  event.preventDefault(); // Email validation
+  event.preventDefault();
+  loginValidation(); // axios req
 
-  emailValidation(); // Password validation
-
-  passwordValidation();
-  var userLogged = {
+  var loginErrors = [];
+  var loginFormData = {
     email: userEmail.value,
     password: userPassword.value
   };
 
-  if (emailValidation() && passwordValidation()) {
-    usersLogged.push(userLogged);
-    loginForm.reset();
-  } else {
-    console.log('User data is not valid');
+  if (!loginErrors.length) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/login"), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      data: loginFormData
+    }).then(function (response) {
+      window.location.href = '/';
+    })["catch"](function (error) {
+      console.log(error);
+    });
   }
+});
 
-  console.log(usersLogged);
-}); // VALIDATION FUNCTIONS
+function loginValidation() {
+  var loginErrors = []; // Email validation
+
+  var emailValid = emailValidation();
+
+  if (!emailValid) {
+    console.log('Email is not valid!');
+    loginErrors.push('Email is not valid!');
+  } // Password validation
+
+
+  var passwordlValid = passwordValidation();
+
+  if (!passwordlValid) {
+    console.log('Password is not valid!');
+    loginErrors.push('Password is not valid!');
+  }
+} // VALIDATION FUNCTIONS
 // Name validation function
 
+
 function nameValidation() {
-  var nameErr = document.getElementById('name-error');
+  var nameErr = getId('name-error');
 
   if (userName.value === '') {
     nameErr.classList.remove('hide');
     nameErr.innerHTML = 'Please fill out this field.';
     userName.style.borderColor = 'tomato';
     return false;
-  } else if (userName.value.match(nameRegex)) {
-    nameErr.classList.add('hide');
-    userName.style.borderColor = '';
-    return true;
-  } else {
+  } else if (!userName.value.match(nameRegex)) {
     nameErr.classList.remove('hide');
     nameErr.innerHTML = 'Name is not valid';
     userName.style.borderColor = 'tomato';
     return false;
-  }
+  } //
+
+
+  nameErr.classList.add('hide');
+  userName.style.borderColor = '';
+  return true;
 }
 
 ; // Email validation function
 
 function emailValidation() {
-  var emailErr = document.getElementById('email-error');
+  var emailErr = getId('email-error');
 
   if (userEmail.value === '') {
     emailErr.classList.remove('hide');
     emailErr.innerHTML = 'Please fill out this field.';
     userEmail.style.borderColor = 'tomato';
     return false;
-  } else if (userEmail.value.match(emailRegex)) {
-    emailErr.classList.add('hide');
-    userEmail.style.borderColor = '';
-    return true;
-  } else {
+  } else if (!userEmail.value.match(emailRegex)) {
     emailErr.classList.remove('hide');
     emailErr.innerHTML = 'Email is not valid';
     userEmail.style.borderColor = 'tomato';
     return false;
+  } else {
+    emailErr.classList.add('hide');
+    userEmail.style.borderColor = '';
+    return true;
   }
 }
 
 ; // Password validation function
 
 function passwordValidation() {
-  var pwErr = document.getElementById('password-error');
+  var pwErr = getId('password-error');
 
   if (userPassword.value === '') {
     pwErr.classList.remove('hide');
@@ -2232,39 +2296,37 @@ function passwordValidation() {
     userPassword.style.borderColor = 'tomato';
     pwText.classList.remove('hide');
     return false;
-  } else if (userPassword.value.match(pwRegex)) {
-    pwErr.classList.add('hide');
-    userPassword.style.borderColor = '';
-    pwText.classList.add('hide');
-    return true;
-  } else {
+  } else if (!userPassword.value.match(pwRegex)) {
     pwErr.classList.remove('hide');
     pwErr.innerHTML = 'Password not valid';
     userPassword.style.borderColor = 'tomato';
-    pwText.classList.remove('hide');
     return false;
+  } else {
+    pwErr.classList.add('hide');
+    userPassword.style.borderColor = '';
+    return true;
   }
 }
 
 ; // Password confirmation function
 
 function passwordConfirmation() {
-  var passErr = document.getElementById('confirm-password-error');
+  var passErr = getId('confirm-password-error');
 
   if (userConfirmPassword.value === '') {
     passErr.classList.remove('hide');
     passErr.innerHTML = 'Please fill out this field.';
     userConfirmPassword.style.borderColor = 'tomato';
     return false;
-  } else if (userPassword.value === userConfirmPassword.value) {
-    passErr.classList.add('hide');
-    userConfirmPassword.style.borderColor = '';
-    return true;
-  } else {
+  } else if (userPassword.value !== userConfirmPassword.value) {
     passErr.classList.remove('hide');
     userConfirmPassword.style.borderColor = 'tomato';
     passErr.innerHTML = 'Password confirmation does not match';
     return false;
+  } else {
+    passErr.classList.add('hide');
+    userConfirmPassword.style.borderColor = '';
+    return true;
   }
 }
 
@@ -2294,12 +2356,16 @@ userConfirmPassword && userConfirmPassword.addEventListener('focus', function (e
   userConfirmPassword.style.borderColor = '';
 }); // HAMBURGER MENU
 
-var hamburger = document.getElementById('hamburger');
-var navMenu = document.getElementById('nav-menu');
-hamburger.addEventListener('click', function () {
-  hamburger.classList.toggle('active');
-  navMenu.classList.toggle('active');
-}); // jquery
+/*
+const hamburger = getId('hamburger');
+const navMenu = getId('nav-menu');
+
+hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+*/
+// jquery
 
 /*
 const jquserPassword = $('#password');
@@ -2330,11 +2396,11 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(_config_js__WEBPACK_I
   //       orderTableRow.appendChild(orderTableCell);
   //     });
   // }
-  var loader = document.getElementById('loader');
+  var loader = getId('loader');
   loader.classList.add('hide');
 
   for (var i = 0; i < response.data.orders.length; i++) {
-    var orderTable = document.getElementById('order-table');
+    var orderTable = getId('order-table');
     orderTable.classList.remove('hide');
     var orderTableRow = document.createElement('tr');
     orderTableRow.classList.add('tr');
@@ -2391,7 +2457,47 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(_config_js__WEBPACK_I
   }
 })["catch"](function (error) {
   console.log(error);
-}); // REGISTER
+}); // JQUERY
+
+/*
+$(function() {
+    const jquserName = $('#name');
+    const jquserEmail = $('#email');
+    const jquserPassword = $('#password');
+    const jquserConfirmPassword = $('#password-confirm');
+    const jqregisterForm = $('#register-form');
+    const jqpwText = $('.pw-text');
+    const jqnameErr = $('#name-error');
+    const jqemailErr = $('#email-error');
+    const jqpwErr = $('password-error');
+    const jqpassErr = $('confirm-password-error');
+    const jqerrMsg = $('.error-msg');
+
+    jqregisterForm.on('submit', function(event) {
+        event.preventDefault();
+    })
+    
+});
+*/
+// HAMBURGER MENU
+
+/*
+const hamburger = getId('hamburger');
+const navMenu = getId('nav-menu');
+
+hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+*/
+// HAMBURGER MENU JQUERY
+
+var jqhamburger = $('#hamburger');
+var jqnavMenu = $('#nav-menu');
+jqhamburger.on('click', function () {
+  jqhamburger.toggleClass('active');
+  jqnavMenu.toggleClass('active');
+}); // REGISTER axios
 // LOG IN axios
 // slusamo event na login dugmetu
 // pokupimo vrijednosti sa inputa

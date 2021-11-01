@@ -1,5 +1,5 @@
 import axios from "axios";
-import { data } from "jquery";
+import { data, post } from "jquery";
 import { config } from './config.js';
 
 console.log(config);
@@ -54,181 +54,236 @@ const { Input } = require("postcss");
 //     }  
 //   }  
 
-const userName = document.getElementById('name');
+const getId = (elemId) => document.getElementById(elemId);
+
+const userName = getId('name');
 const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
 
-const userEmail = document.getElementById('email');
+const userEmail = getId('email');
 const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
 
-const userPassword = document.getElementById('password');
-const userConfirmPassword = document.getElementById('password-confirm');
-const registerForm = document.getElementById('register-form');
+const userPassword = getId('password');
+const userConfirmPassword = getId('password-confirm');
+const registerForm = getId('register-form');
 const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
 const pwText = document.querySelector('.pw-text');
 
-const nameErr = document.getElementById('name-error');
-const emailErr = document.getElementById('email-error');
-const pwErr = document.getElementById('password-error');
-const passErr = document.getElementById('confirm-password-error');
+const nameErr = getId('name-error');
+const emailErr = getId('email-error');
+const pwErr = getId('password-error');
+const passErr = getId('confirm-password-error');
 const errMsg = document.querySelector('.error-msg');
 
 
-const users = [];
-const usersLogged = []; 
 
 // REGISTER FORM VALIDATION
 
 registerForm && registerForm.addEventListener('submit', function(event) {
-    //validation
+   
     event.preventDefault();
 
-    // Name
-    nameValidation();
-    
-   
-    // Email validation
-    emailValidation();
-    
+    registerValidation();
 
-    // Password validation
-    passwordValidation();
-  
-    
-    // Password confirmation
-    passwordConfirmation();
-    
+    //axios req
+    const validationErrors = [];
 
-
-    const user = {
+    const formData = {
         name: userName.value,
         email: userEmail.value,
-        password: userPassword.value
+        password: userPassword.value,
     }
 
-    if (nameValidation() && emailValidation() && passwordValidation() && passwordConfirmation) {
-        users.push(user);
-        registerForm.reset();
-    } else {
-        console.log('User data is not valid');
+    if (!validationErrors.length) {
+        axios(`${config.baseURL}/api/v1/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }, 
+            data: formData
+        })
+        .then(response => {
+            window.location.href = '/login';
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
-        console.log(users);
 });
+
+function registerValidation() {
+    //validate    
+    const validationErrors = [];
+
+    // Name validation
+    const nameValid = nameValidation();
+    if (!nameValid) {
+        console.log('Name is not valid!');
+        validationErrors.push('Name is not valid!');
+    }
+
+    // Email validation
+    const emailValid = emailValidation();
+    if (!emailValid) {
+        console.log('Email is not valid!');
+        validationErrors.push('Email is not valid!');
+    }
+    
+    // Password validation
+    const passwordlValid = passwordValidation();
+    if (!passwordlValid) {
+        console.log('Password is not valid!');
+        validationErrors.push('Password is not valid!');
+    }
+    
+    // Password confirmation
+    const passwordConfirmationValid = passwordConfirmation();
+    if (!passwordConfirmationValid) {
+        console.log('Password confirmation is not valid!');
+        validationErrors.push('Password confirmation is not valid!');
+    }
+}
 
 // LOG IN FORM VALIDATION
 
-const loginForm = document.getElementById('login-form');
+const loginForm = getId('login-form');
 
 
 loginForm && loginForm.addEventListener('submit', function(event) {
-    //validation
+    
     event.preventDefault();
 
-    // Email validation
-    emailValidation();
+    loginValidation();
 
-    // Password validation
-    passwordValidation();
+     // axios req
 
-
-    const userLogged = {
+    const loginErrors = [];
+    const loginFormData = {
         email: userEmail.value,
         password: userPassword.value
     }
 
-    if (emailValidation() && passwordValidation()) {
-        usersLogged.push(userLogged);
-        loginForm.reset();
-    } else {
-        console.log('User data is not valid');
+    if(!loginErrors.length) {
+        axios(`${config.baseURL}/api/v1/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            data: loginFormData
+        })
+        .then(response => {
+            window.location.href = '/';
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
-        console.log(usersLogged);
 });
+
+
+function loginValidation() {
+   
+    const loginErrors = [];
+    // Email validation
+    const emailValid = emailValidation();
+    if (!emailValid) {
+        console.log('Email is not valid!');
+        loginErrors.push('Email is not valid!');
+    }
+   
+    // Password validation
+    const passwordlValid = passwordValidation();
+    if (!passwordlValid) {
+        console.log('Password is not valid!');
+        loginErrors.push('Password is not valid!');
+    }
+}
 
 // VALIDATION FUNCTIONS
 
 // Name validation function
 function nameValidation() {
-    const nameErr = document.getElementById('name-error');
+    const nameErr = getId('name-error');
+   
     if (userName.value === '') {
         nameErr.classList.remove('hide');
-        nameErr.innerHTML= 'Please fill out this field.';
+        nameErr.innerHTML = 'Please fill out this field.';
         userName.style.borderColor = 'tomato';
         return false;
-    } else if (userName.value.match(nameRegex)) {
-        nameErr.classList.add('hide');
-        userName.style.borderColor = '';
-        return true;
-    } else {
+    } else if (!userName.value.match(nameRegex)) {
         nameErr.classList.remove('hide');
-        nameErr.innerHTML= 'Name is not valid';
+        nameErr.innerHTML = 'Name is not valid';
         userName.style.borderColor = 'tomato';
         return false;
     }
+    //
+    nameErr.classList.add('hide');
+    userName.style.borderColor = ''; 
+    return true;
 };
 
 
 // Email validation function
 function emailValidation() {
-    const emailErr = document.getElementById('email-error');
+    const emailErr = getId('email-error');
     if (userEmail.value === '') {
         emailErr.classList.remove('hide');
         emailErr.innerHTML= 'Please fill out this field.';
         userEmail.style.borderColor = 'tomato';
         return false;
-    } else if (userEmail.value.match(emailRegex)) {
-        emailErr.classList.add('hide');
-        userEmail.style.borderColor = '';
-        return true;
-    } else {
+    } else if (!userEmail.value.match(emailRegex)) {
         emailErr.classList.remove('hide');
         emailErr.innerHTML= 'Email is not valid';
         userEmail.style.borderColor = 'tomato';
         return false;
+    } else {
+        emailErr.classList.add('hide');
+        userEmail.style.borderColor = '';
+        return true;
     }
 };
 
 
 // Password validation function
 function passwordValidation() {
-    const pwErr = document.getElementById('password-error');
+    const pwErr = getId('password-error');
     if (userPassword.value === '') {
         pwErr.classList.remove('hide');
         pwErr.innerHTML= 'Please fill out this field.';
         userPassword.style.borderColor = 'tomato';
         pwText.classList.remove('hide');
         return false;
-    } else if (userPassword.value.match(pwRegex)) {
-        pwErr.classList.add('hide');
-        userPassword.style.borderColor = '';
-        pwText.classList.add('hide');
-        return true;
-    } else {
+    } else if (!userPassword.value.match(pwRegex)) {
         pwErr.classList.remove('hide');
         pwErr.innerHTML= 'Password not valid';
         userPassword.style.borderColor = 'tomato';
-        pwText.classList.remove('hide');
         return false;
+    } else {
+        pwErr.classList.add('hide');
+        userPassword.style.borderColor = '';
+        return true;
     }
 };
 
 // Password confirmation function
 function passwordConfirmation() {
-    const passErr = document.getElementById('confirm-password-error');
+    const passErr = getId('confirm-password-error');
     if (userConfirmPassword.value === '') {
         passErr.classList.remove('hide');
         passErr.innerHTML= 'Please fill out this field.';
         userConfirmPassword.style.borderColor = 'tomato';
         return false;
     }
-    else if (userPassword.value === userConfirmPassword.value) {
-        passErr.classList.add('hide');
-        userConfirmPassword.style.borderColor = '';
-        return true;
-    } else {
+    else if (userPassword.value !== userConfirmPassword.value) {
         passErr.classList.remove('hide');
         userConfirmPassword.style.borderColor = 'tomato';
         passErr.innerHTML = 'Password confirmation does not match';
         return false;
+    } else {
+        passErr.classList.add('hide');
+        userConfirmPassword.style.borderColor = '';
+        return true;
     }
 };
 
@@ -261,15 +316,17 @@ userConfirmPassword && userConfirmPassword.addEventListener('focus', function(ev
 });
 
 
-// HAMBURGER MENU
 
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
+// HAMBURGER MENU
+/*
+const hamburger = getId('hamburger');
+const navMenu = getId('nav-menu');
 
 hamburger.addEventListener('click', function() {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
+*/
 
 
     // jquery
@@ -307,10 +364,10 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
     //       orderTableRow.appendChild(orderTableCell);
     //     });
     // }
-    const loader = document.getElementById('loader');
+    const loader = getId('loader');
     loader.classList.add('hide');
     for (let i = 0; i < response.data.orders.length; i++) {
-        const orderTable = document.getElementById('order-table');
+        const orderTable = getId('order-table');
         orderTable.classList.remove('hide');
         const orderTableRow = document.createElement('tr');
         orderTableRow.classList.add('tr');
@@ -360,13 +417,58 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
 
 
 
+// JQUERY
+/*
+$(function() {
+    const jquserName = $('#name');
+    const jquserEmail = $('#email');
+    const jquserPassword = $('#password');
+    const jquserConfirmPassword = $('#password-confirm');
+    const jqregisterForm = $('#register-form');
+    const jqpwText = $('.pw-text');
+    const jqnameErr = $('#name-error');
+    const jqemailErr = $('#email-error');
+    const jqpwErr = $('password-error');
+    const jqpassErr = $('confirm-password-error');
+    const jqerrMsg = $('.error-msg');
 
-// REGISTER
+    jqregisterForm.on('submit', function(event) {
+        event.preventDefault();
+    })
+    
+});
+*/
+
+// HAMBURGER MENU
+/*
+const hamburger = getId('hamburger');
+const navMenu = getId('nav-menu');
+
+hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+*/
+
+// HAMBURGER MENU JQUERY
+
+const jqhamburger = $('#hamburger');
+const jqnavMenu = $('#nav-menu');
+
+jqhamburger.on('click', function() {
+    jqhamburger.toggleClass('active');
+    jqnavMenu.toggleClass('active');
+});
 
 
 
 
 
+
+
+
+
+// REGISTER axios
 
 
 

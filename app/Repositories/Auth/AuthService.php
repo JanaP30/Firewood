@@ -42,29 +42,49 @@ class AuthServiceResponse {
                 $errors[] = 'Failed to validate login.Please contact support';
             }
            
-    
             
             return new AuthServiceResponse($errors, $data);
         }
 
             
-            public static function createRegister(Request $request, $data){
+        public static function registerNewUser($email, $name, $password){
             
-            $attr = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|unique:users,email',
-                'password' => 'required|string|confirmed||min:6|[^a-zA-Z0-9 -]'
-            ]);
+            $errors = null;
+            $data = [];
+
+            try {
+
+                $emilExists = AuthRepository::getUserByEmail($email);
+                if($emilExists){
+                    return new AuthServiceResponse(['Please choose another email'], $data);
+                }
+
+                $nameExists = AuthRepository::getUserByName($name);
+                if($nameExists){
+                    return new AuthServiceResponse(['Please choose another name'], $data);
+                }
+
+                throw new Exception('Namjerni error');
+
+                $user = User::create([
+                    'email' => $email,
+                    'name' => $name,
+                    'password' => bcrypt($password)
+                ]);
+
+
+                $data['user'] = $user;
+
+            } catch (Exception $e) {
+                Log::error('Failed to register.Error:'. $e);
+                $errors[] = 'Failed to register.Please contact support';
+            }
+           
     
-            $user = User::create([
-                'name' => $attr['name'],
-                'password' => bcrypt($attr['password']),
-                'email' => $attr['email']
-            ]);
-    
-        return new AuthServiceResponse(true, [], $data);
+            
+            return new AuthServiceResponse($errors, $data);
        
         
-    }
+        }
 
     }

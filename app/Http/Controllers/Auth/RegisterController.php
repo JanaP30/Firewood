@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Repositories\Auth\AuthService;
 use App\Repositories\Auth\LoginService;
 
@@ -10,20 +11,20 @@ class RegisterController extends Controller
 
 {
 
-    public function createRegister($attr, $user)
+    public function createRegister(RegisterRequest $request)
     {
-        $response = AuthService::createRegister($attr, $user);
-        if(!$response->success){
-            return back()->withErrors(['Failed ']);
+        $input = $request->input();
+        $name = $input['name'];
+        $email = $input['email'];
+        $password = $input['password'];
+
+        $response = AuthService::registerNewUser($email, $name, $password);
+
+        if($response->errors){
+            return back()->withErrors($response->errors);
         }
 
-        $data = [
-            'name'=> $response->data['name'],
-            'email'=> $response->data['email'],
-            'password'=> $response->data['password'],
-            
-        ];
-        return view('register', $data);
+        return redirect('/');
     }
 
 

@@ -29,7 +29,7 @@ class OrdersController extends Controller
         }
 
         $data = [
-            'order'=> $response->data['orders']
+            'order'=> Order::all()
             
         ];
         return view('order.index', $data);

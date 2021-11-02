@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\v1\OrdersController;
 use App\Http\Controllers\API\v1\ProductController;
+use App\Http\Controllers\API\v1\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,10 @@ Route::prefix('v1')->group(function(){
     Route::get('get-products', [ProductController::class, 'getProducts']);
     Route::get('get-product-types', [ProductController::class, 'getProductTypes']);
     Route::get('get-orders', [OrdersController::class, 'getOrders']);
+
+
+    Route::post('login', [AuthController::class, 'createLogin']);
+    Route::post('register', [AuthController::class, 'register']);
+
 
 });

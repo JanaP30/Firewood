@@ -34,6 +34,10 @@ class User extends Authenticatable
         
     ];
 
+
+    public static $_TYPE_ADMIN  = 1;
+    public static $_TYPE_USER   = 2;
+
       
 }
     

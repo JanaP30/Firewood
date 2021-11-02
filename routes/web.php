@@ -8,6 +8,9 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PrintoutOfOrders;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +27,10 @@ Route::get('/', [App\Http\Controllers\PublicController::class, 'index']);
 Route::post('/store-order', [OrdersController::class, 'store'])->name('order.store');
 Route::get('/success/{id}', [OrdersController::class, 'success']);    
 
-Auth::routes(['register' => false]);
+//Auth::routes(['register' => false]);
+Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/login', [LoginController::class, 'login']);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -47,4 +53,8 @@ Route::get('order/create', [OrdersController::class, 'create'])->name('order.cre
 Route::get('order/approved/{id}', [OrdersController::class, 'approved'])->name('order.approved');
 
 Route::get('order/printout-of-order', [PrintoutOfOrders::class, 'index'])->name('printoutOfOrders.index');
+
+Route::prefix('admin')->group(function(){
+    Route::get('orders', [OrdersController::class, 'getAdminOrders']);
+});
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { data, post } from "jquery";
 import { config } from './config.js';
 
-console.log(config);
+
 
 // /**
 //  * First we will load all of this project's JavaScript dependencies which
@@ -54,124 +54,141 @@ const { Input } = require("postcss");
 //     }  
 //   }  
 
-const getId = (elemId) => document.getElementById(elemId);
+//const getId = (elemId) => document.getElementById(elemId);
 
-const userName = getId('name');
-const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
 
-const userEmail = getId('email');
-const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
+//const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
+//const userNameElem = getId('name');
+//const userEmailElem = getId('email');
+//const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
 
-const userPassword = getId('password');
-const userConfirmPassword = getId('password-confirm');
-const registerForm = getId('register-form');
-const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
-const pwText = document.querySelector('.pw-text');
+//const userPasswordElem = getId('password');
+//const userConfirmPasswordElem = getId('password-confirm');
+//const registerForm = getId('register-form');
+//const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
+//const pwText = document.querySelector('.pw-text');
 
-const nameErr = getId('name-error');
-const emailErr = getId('email-error');
-const pwErr = getId('password-error');
-const passErr = getId('confirm-password-error');
-const errMsg = document.querySelector('.error-msg');
-
+//const nameErr = getId('name-error');
+//const emailErr = getId('email-error');
+//const pwErr = getId('password-error');
+//const passErr = getId('confirm-password-error');
+//const errMsg = document.querySelector('.error-msg');
 
 
 // REGISTER FORM VALIDATION
+document.getElementById('register-form').addEventListener('submit', function(event) {
 
-registerForm && registerForm.addEventListener('submit', function(event) {
-   
     event.preventDefault();
 
     registerValidation();
+   // const inputsRegisterValid = registerValidation(userName, userEmail, userPassword, userConfirmPassword);
+    /*console.log(inputsRegisterValid);
+
+
+    if (!inputsRegisterValid) {
+        return;
+    }*/
 
     //axios req
-    const validationErrors = [];
-
+ /*
     const formData = {
-        name: userName.value,
-        email: userEmail.value,
-        password: userPassword.value,
+        name: userName,
+        email: userEmail,
+        password: userPassword,
     }
 
-    if (!validationErrors.length) {
-        axios(`${config.baseURL}/api/v1/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }, 
-            data: formData
-        })
-        .then(response => {
-            window.location.href = '/login';
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
+    axios(`${config.baseURL}/api/v1/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }, 
+        data: formData
+    })
+    .then(response => {
+        window.location.href = '/login';
+    })
+    .catch(error => {
+        console.log(error);
+    });*/
 });
 
 function registerValidation() {
     //validate    
-    const validationErrors = [];
+    
 
     // Name validation
     const nameValid = nameValidation();
     if (!nameValid) {
         console.log('Name is not valid!');
-        validationErrors.push('Name is not valid!');
+        // validationErrors.push('Name is not valid!');
     }
 
     // Email validation
     const emailValid = emailValidation();
     if (!emailValid) {
         console.log('Email is not valid!');
-        validationErrors.push('Email is not valid!');
+        // validationErrors.push('Email is not valid!');
     }
     
     // Password validation
-    const passwordlValid = passwordValidation();
-    if (!passwordlValid) {
+    const passwordValid = passwordValidation();
+    if (!passwordValid) {
         console.log('Password is not valid!');
-        validationErrors.push('Password is not valid!');
+        // validationErrors.push('Password is not valid!');
     }
     
     // Password confirmation
     const passwordConfirmationValid = passwordConfirmation();
     if (!passwordConfirmationValid) {
         console.log('Password confirmation is not valid!');
-        validationErrors.push('Password confirmation is not valid!');
+        // validationErrors.push('Password confirmation is not valid!');
     }
+
+    console.log(nameValid, emailValid, passwordValid, passwordConfirmationValid)
+    return nameValid && emailValid && passwordValid && passwordConfirmationValid;
+    /*
+    if (!nameValid || !emailValid || !passwordValid || !passwordConfirmationValid) {
+        return false;
+    } else {
+        return true;
+    }*/
 }
 
 // LOG IN FORM VALIDATION
 
-const loginForm = getId('login-form');
+const loginForm = document.getElementById('login-form');
 
 
 loginForm && loginForm.addEventListener('submit', function(event) {
     
     event.preventDefault();
 
-    loginValidation();
+    const userEmail = userEmailElem.value;
+    const userPassword = userPasswordElem.value;
 
-     // axios req
+    const inputsLoginValid = loginValidation(userEmail, userPassword);
 
-    const loginErrors = [];
-    const loginFormData = {
-        email: userEmail.value,
-        password: userPassword.value
+    if (!inputsLoginValid) {
+        return;
     }
 
-    if(!loginErrors.length) {
-        axios(`${config.baseURL}/api/v1/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+    // axios req
+
+    const loginFormData = {
+        email: userEmailElem.value,
+        password: userPasswordElem.value
+    }
+
+    
+    axios(`${config.baseURL}/api/v1/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
             },
-            data: loginFormData
-        })
+        data: loginFormData
+    })
         .then(response => {
             window.location.href = '/';
         })
@@ -179,67 +196,71 @@ loginForm && loginForm.addEventListener('submit', function(event) {
             console.log(error);
         })
     }
-});
+);
 
 
 function loginValidation() {
    
-    const loginErrors = [];
     // Email validation
     const emailValid = emailValidation();
     if (!emailValid) {
         console.log('Email is not valid!');
-        loginErrors.push('Email is not valid!');
+        //loginErrors.push('Email is not valid!');
     }
    
     // Password validation
-    const passwordlValid = passwordValidation();
-    if (!passwordlValid) {
+    const passwordValid = passwordValidation();
+    if (!passwordValid) {
         console.log('Password is not valid!');
-        loginErrors.push('Password is not valid!');
+        //loginErrors.push('Password is not valid!');
     }
+
+    return emailValid && passwordValid;
 }
 
 // VALIDATION FUNCTIONS
 
 // Name validation function
 function nameValidation() {
-    const nameErr = getId('name-error');
-   
-    if (userName.value === '') {
+    const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
+    const nameErr = document.getElementById('name-error');
+    const userNameElem = document.getElementById('name');
+    if (userNameElem.value === '') {
         nameErr.classList.remove('hide');
         nameErr.innerHTML = 'Please fill out this field.';
-        userName.style.borderColor = 'tomato';
+        userNameElem.classList.add('border-color');
         return false;
-    } else if (!userName.value.match(nameRegex)) {
+    } else if (!userNameElem.value.match(nameRegex)) {
         nameErr.classList.remove('hide');
         nameErr.innerHTML = 'Name is not valid';
-        userName.style.borderColor = 'tomato';
+        userNameElem.classList.add('border-color');
         return false;
     }
     //
     nameErr.classList.add('hide');
-    userName.style.borderColor = ''; 
+    userNameElem.classList.remove('border-color'); 
     return true;
 };
 
 
 // Email validation function
 function emailValidation() {
-    const emailErr = getId('email-error');
-    if (userEmail.value === '') {
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
+    const emailErr = document.getElementById('email-error');
+    const userEmailElem = document.getElementById('email');
+    if (userEmailElem.value === '') {
         emailErr.classList.remove('hide');
         emailErr.innerHTML= 'Please fill out this field.';
-        userEmail.style.borderColor = 'tomato';
+        userEmailElem.classList.add('border-color');
         return false;
-    } else if (!userEmail.value.match(emailRegex)) {
+    } else if (!userEmailElem.value.match(emailRegex)) {
         emailErr.classList.remove('hide');
         emailErr.innerHTML= 'Email is not valid';
-        userEmail.style.borderColor = 'tomato';
+        userEmailElem.classList.add('border-color');
         return false;
     } else {
         emailErr.classList.add('hide');
-        userEmail.style.borderColor = '';
+        userEmailElem.classList.remove('border-color');
         return true;
     }
 };
@@ -247,72 +268,91 @@ function emailValidation() {
 
 // Password validation function
 function passwordValidation() {
-    const pwErr = getId('password-error');
-    if (userPassword.value === '') {
+    const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
+    const pwErr = document.getElementById('password-error');
+    const pwText = document.querySelector('.pw-text');
+    const userPasswordElem = document.getElementById('password');
+    if (userPasswordElem.value === '') {
         pwErr.classList.remove('hide');
         pwErr.innerHTML= 'Please fill out this field.';
-        userPassword.style.borderColor = 'tomato';
+        userPasswordElem.classList.add('border-color');
         pwText.classList.remove('hide');
         return false;
-    } else if (!userPassword.value.match(pwRegex)) {
+    } else if (!userPasswordElem.value.match(pwRegex)) {
         pwErr.classList.remove('hide');
         pwErr.innerHTML= 'Password not valid';
-        userPassword.style.borderColor = 'tomato';
+        userPasswordElem.classList.add('border-color');
+        pwText.classList.remove('hide');
         return false;
     } else {
+        pwText.classList.add('hide');
         pwErr.classList.add('hide');
-        userPassword.style.borderColor = '';
+        userPasswordElem.classList.remove('border-color');
         return true;
     }
 };
 
 // Password confirmation function
 function passwordConfirmation() {
-    const passErr = getId('confirm-password-error');
-    if (userConfirmPassword.value === '') {
+    const passErr = document.getElementById('confirm-password-error');
+    const userConfirmPasswordElem = document.getElementById('password-confirm');
+    const userPasswordElem = document.getElementById('password');
+    if (userConfirmPasswordElem.value === '') {
         passErr.classList.remove('hide');
         passErr.innerHTML= 'Please fill out this field.';
-        userConfirmPassword.style.borderColor = 'tomato';
+        userConfirmPasswordElem.classList.add('border-color');
         return false;
     }
-    else if (userPassword.value !== userConfirmPassword.value) {
+    else if (userPasswordElem.value !== userConfirmPasswordElem.value) {
         passErr.classList.remove('hide');
-        userConfirmPassword.style.borderColor = 'tomato';
+        userConfirmPasswordElem.classList.add('border-color');
         passErr.innerHTML = 'Password confirmation does not match';
         return false;
     } else {
         passErr.classList.add('hide');
-        userConfirmPassword.style.borderColor = '';
+        userConfirmPasswordElem.classList.remove('border-color');
         return true;
     }
 };
 
-userName && userName.addEventListener('focus', function(event) {
+document.getElementById('name').addEventListener('focus', function(event) {
     //validation
-    event.preventDefault();
+    // event.preventDefault();
+    const userNameElem = document.getElementById('name');
+    const nameErr = document.getElementById('name-error');
     nameErr.classList.add('hide');
-    userName.style.borderColor = '';
+    userNameElem.classList.remove('border-color'); 
+    // userNameElem.style.borderColor = '';
 });
 
-userEmail && userEmail.addEventListener('focus', function(event) {
+document.getElementById('email').addEventListener('focus', function(event) {
     //validation
-    event.preventDefault();
+    //event.preventDefault();
+    const userEmailElem = document.getElementById('email');
+    const emailErr = document.getElementById('email-error');
     emailErr.classList.add('hide');
-    userEmail.style.borderColor = '';
+    userEmailElem.classList.remove('border-color'); 
+    // userEmailElem.style.borderColor = '';
 });
 
-userPassword && userPassword.addEventListener('focus', function(event) {
+document.getElementById('password').addEventListener('focus', function(event) {
     //validation
-    event.preventDefault();
+   // event.preventDefault();
+    const userPasswordElem = document.getElementById('password');
+    const pwErr = document.getElementById('password-error');
     pwErr.classList.add('hide');
-    userPassword.style.borderColor = '';
+    userPasswordElem.classList.remove('border-color'); 
+    //userPasswordElem.style.borderColor = '';
 });
 
-userConfirmPassword && userConfirmPassword.addEventListener('focus', function(event) {
+document.getElementById('password-confirm').addEventListener('focus', function(event) {
     //validation
-    event.preventDefault();
+   // event.preventDefault();
+    const userConfirmPasswordElem = document.getElementById('password-confirm');
+    const passErr = document.getElementById('confirm-password-error');
     passErr.classList.add('hide');
-    userConfirmPassword.style.borderColor = '';
+    userConfirmPasswordElem.classList.remove('border-color'); 
+    //userConfirmPasswordElem.style.borderColor = '';
 });
 
 
@@ -364,10 +404,10 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
     //       orderTableRow.appendChild(orderTableCell);
     //     });
     // }
-    const loader = getId('loader');
+    const loader = document.getElementById('loader');
     loader.classList.add('hide');
     for (let i = 0; i < response.data.orders.length; i++) {
-        const orderTable = getId('order-table');
+        const orderTable = document.getElementById('order-table');
         orderTable.classList.remove('hide');
         const orderTableRow = document.createElement('tr');
         orderTableRow.classList.add('tr');
@@ -459,7 +499,6 @@ jqhamburger.on('click', function() {
     jqhamburger.toggleClass('active');
     jqnavMenu.toggleClass('active');
 });
-
 
 
 

@@ -2069,8 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config.js */ "./resources/js/config.js");
 
 
-
-console.log(_config_js__WEBPACK_IMPORTED_MODULE_2__.config); // /**
+ // /**
 //  * First we will load all of this project's JavaScript dependencies which
 //  * includes Vue and other libraries. It is a great starting point when
 //  * building robust, powerful web applications using Vue and Laravel.
@@ -2109,178 +2108,191 @@ var _require = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/po
 //       alert("Password created successfully");  
 //     }  
 //   }  
+//const getId = (elemId) => document.getElementById(elemId);
+//const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
+//const userNameElem = getId('name');
+//const userEmailElem = getId('email');
+//const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
+//const userPasswordElem = getId('password');
+//const userConfirmPasswordElem = getId('password-confirm');
+//const registerForm = getId('register-form');
+//const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
+//const pwText = document.querySelector('.pw-text');
+//const nameErr = getId('name-error');
+//const emailErr = getId('email-error');
+//const pwErr = getId('password-error');
+//const passErr = getId('confirm-password-error');
+//const errMsg = document.querySelector('.error-msg');
+// REGISTER FORM VALIDATION
 
 
-var getId = function getId(elemId) {
-  return document.getElementById(elemId);
-};
-
-var userName = getId('name');
-var nameRegex = /^[ a-zA-Z\-\’]+$/gi;
-var userEmail = getId('email');
-var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
-var userPassword = getId('password');
-var userConfirmPassword = getId('password-confirm');
-var registerForm = getId('register-form');
-var pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
-var pwText = document.querySelector('.pw-text');
-var nameErr = getId('name-error');
-var emailErr = getId('email-error');
-var pwErr = getId('password-error');
-var passErr = getId('confirm-password-error');
-var errMsg = document.querySelector('.error-msg'); // REGISTER FORM VALIDATION
-
-registerForm && registerForm.addEventListener('submit', function (event) {
+document.getElementById('register-form').addEventListener('submit', function (event) {
   event.preventDefault();
-  registerValidation(); //axios req
+  registerValidation(); // const inputsRegisterValid = registerValidation(userName, userEmail, userPassword, userConfirmPassword);
 
-  var validationErrors = [];
-  var formData = {
-    name: userName.value,
-    email: userEmail.value,
-    password: userPassword.value
-  };
+  /*console.log(inputsRegisterValid);
+      if (!inputsRegisterValid) {
+      return;
+  }*/
+  //axios req
 
-  if (!validationErrors.length) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/register"), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      data: formData
-    }).then(function (response) {
-      window.location.href = '/login';
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
+  /*
+     const formData = {
+         name: userName,
+         email: userEmail,
+         password: userPassword,
+     }
+  
+     axios(`${config.baseURL}/api/v1/register`, {
+         method: 'POST',
+         headers: {
+             'Content-Type': 'application/json',
+             'Accept': 'application/json'
+         }, 
+         data: formData
+     })
+     .then(response => {
+         window.location.href = '/login';
+     })
+     .catch(error => {
+         console.log(error);
+     });*/
 });
 
 function registerValidation() {
   //validate    
-  var validationErrors = []; // Name validation
-
+  // Name validation
   var nameValid = nameValidation();
 
   if (!nameValid) {
-    console.log('Name is not valid!');
-    validationErrors.push('Name is not valid!');
+    console.log('Name is not valid!'); // validationErrors.push('Name is not valid!');
   } // Email validation
 
 
   var emailValid = emailValidation();
 
   if (!emailValid) {
-    console.log('Email is not valid!');
-    validationErrors.push('Email is not valid!');
+    console.log('Email is not valid!'); // validationErrors.push('Email is not valid!');
   } // Password validation
 
 
-  var passwordlValid = passwordValidation();
+  var passwordValid = passwordValidation();
 
-  if (!passwordlValid) {
-    console.log('Password is not valid!');
-    validationErrors.push('Password is not valid!');
+  if (!passwordValid) {
+    console.log('Password is not valid!'); // validationErrors.push('Password is not valid!');
   } // Password confirmation
 
 
   var passwordConfirmationValid = passwordConfirmation();
 
   if (!passwordConfirmationValid) {
-    console.log('Password confirmation is not valid!');
-    validationErrors.push('Password confirmation is not valid!');
+    console.log('Password confirmation is not valid!'); // validationErrors.push('Password confirmation is not valid!');
   }
+
+  console.log(nameValid, emailValid, passwordValid, passwordConfirmationValid);
+  return nameValid && emailValid && passwordValid && passwordConfirmationValid;
+  /*
+  if (!nameValid || !emailValid || !passwordValid || !passwordConfirmationValid) {
+      return false;
+  } else {
+      return true;
+  }*/
 } // LOG IN FORM VALIDATION
 
 
-var loginForm = getId('login-form');
+var loginForm = document.getElementById('login-form');
 loginForm && loginForm.addEventListener('submit', function (event) {
   event.preventDefault();
-  loginValidation(); // axios req
+  var userEmail = userEmailElem.value;
+  var userPassword = userPasswordElem.value;
+  var inputsLoginValid = loginValidation(userEmail, userPassword);
 
-  var loginErrors = [];
+  if (!inputsLoginValid) {
+    return;
+  } // axios req
+
+
   var loginFormData = {
-    email: userEmail.value,
-    password: userPassword.value
+    email: userEmailElem.value,
+    password: userPasswordElem.value
   };
-
-  if (!loginErrors.length) {
-    axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/login"), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      data: loginFormData
-    }).then(function (response) {
-      window.location.href = '/';
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  }
+  axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/login"), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    data: loginFormData
+  }).then(function (response) {
+    window.location.href = '/';
+  })["catch"](function (error) {
+    console.log(error);
+  });
 });
 
 function loginValidation() {
-  var loginErrors = []; // Email validation
-
+  // Email validation
   var emailValid = emailValidation();
 
   if (!emailValid) {
-    console.log('Email is not valid!');
-    loginErrors.push('Email is not valid!');
+    console.log('Email is not valid!'); //loginErrors.push('Email is not valid!');
   } // Password validation
 
 
-  var passwordlValid = passwordValidation();
+  var passwordValid = passwordValidation();
 
-  if (!passwordlValid) {
-    console.log('Password is not valid!');
-    loginErrors.push('Password is not valid!');
+  if (!passwordValid) {
+    console.log('Password is not valid!'); //loginErrors.push('Password is not valid!');
   }
+
+  return emailValid && passwordValid;
 } // VALIDATION FUNCTIONS
 // Name validation function
 
 
 function nameValidation() {
-  var nameErr = getId('name-error');
+  var nameRegex = /^[ a-zA-Z\-\’]+$/gi;
+  var nameErr = document.getElementById('name-error');
+  var userNameElem = document.getElementById('name');
 
-  if (userName.value === '') {
+  if (userNameElem.value === '') {
     nameErr.classList.remove('hide');
     nameErr.innerHTML = 'Please fill out this field.';
-    userName.style.borderColor = 'tomato';
+    userNameElem.classList.add('border-color');
     return false;
-  } else if (!userName.value.match(nameRegex)) {
+  } else if (!userNameElem.value.match(nameRegex)) {
     nameErr.classList.remove('hide');
     nameErr.innerHTML = 'Name is not valid';
-    userName.style.borderColor = 'tomato';
+    userNameElem.classList.add('border-color');
     return false;
   } //
 
 
   nameErr.classList.add('hide');
-  userName.style.borderColor = '';
+  userNameElem.classList.remove('border-color');
   return true;
 }
 
 ; // Email validation function
 
 function emailValidation() {
-  var emailErr = getId('email-error');
+  var emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
+  var emailErr = document.getElementById('email-error');
+  var userEmailElem = document.getElementById('email');
 
-  if (userEmail.value === '') {
+  if (userEmailElem.value === '') {
     emailErr.classList.remove('hide');
     emailErr.innerHTML = 'Please fill out this field.';
-    userEmail.style.borderColor = 'tomato';
+    userEmailElem.classList.add('border-color');
     return false;
-  } else if (!userEmail.value.match(emailRegex)) {
+  } else if (!userEmailElem.value.match(emailRegex)) {
     emailErr.classList.remove('hide');
     emailErr.innerHTML = 'Email is not valid';
-    userEmail.style.borderColor = 'tomato';
+    userEmailElem.classList.add('border-color');
     return false;
   } else {
     emailErr.classList.add('hide');
-    userEmail.style.borderColor = '';
+    userEmailElem.classList.remove('border-color');
     return true;
   }
 }
@@ -2288,22 +2300,27 @@ function emailValidation() {
 ; // Password validation function
 
 function passwordValidation() {
-  var pwErr = getId('password-error');
+  var pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
+  var pwErr = document.getElementById('password-error');
+  var pwText = document.querySelector('.pw-text');
+  var userPasswordElem = document.getElementById('password');
 
-  if (userPassword.value === '') {
+  if (userPasswordElem.value === '') {
     pwErr.classList.remove('hide');
     pwErr.innerHTML = 'Please fill out this field.';
-    userPassword.style.borderColor = 'tomato';
+    userPasswordElem.classList.add('border-color');
     pwText.classList.remove('hide');
     return false;
-  } else if (!userPassword.value.match(pwRegex)) {
+  } else if (!userPasswordElem.value.match(pwRegex)) {
     pwErr.classList.remove('hide');
     pwErr.innerHTML = 'Password not valid';
-    userPassword.style.borderColor = 'tomato';
+    userPasswordElem.classList.add('border-color');
+    pwText.classList.remove('hide');
     return false;
   } else {
+    pwText.classList.add('hide');
     pwErr.classList.add('hide');
-    userPassword.style.borderColor = '';
+    userPasswordElem.classList.remove('border-color');
     return true;
   }
 }
@@ -2311,49 +2328,59 @@ function passwordValidation() {
 ; // Password confirmation function
 
 function passwordConfirmation() {
-  var passErr = getId('confirm-password-error');
+  var passErr = document.getElementById('confirm-password-error');
+  var userConfirmPasswordElem = document.getElementById('password-confirm');
+  var userPasswordElem = document.getElementById('password');
 
-  if (userConfirmPassword.value === '') {
+  if (userConfirmPasswordElem.value === '') {
     passErr.classList.remove('hide');
     passErr.innerHTML = 'Please fill out this field.';
-    userConfirmPassword.style.borderColor = 'tomato';
+    userConfirmPasswordElem.classList.add('border-color');
     return false;
-  } else if (userPassword.value !== userConfirmPassword.value) {
+  } else if (userPasswordElem.value !== userConfirmPasswordElem.value) {
     passErr.classList.remove('hide');
-    userConfirmPassword.style.borderColor = 'tomato';
+    userConfirmPasswordElem.classList.add('border-color');
     passErr.innerHTML = 'Password confirmation does not match';
     return false;
   } else {
     passErr.classList.add('hide');
-    userConfirmPassword.style.borderColor = '';
+    userConfirmPasswordElem.classList.remove('border-color');
     return true;
   }
 }
 
 ;
-userName && userName.addEventListener('focus', function (event) {
+document.getElementById('name').addEventListener('focus', function (event) {
   //validation
-  event.preventDefault();
+  // event.preventDefault();
+  var userNameElem = document.getElementById('name');
+  var nameErr = document.getElementById('name-error');
   nameErr.classList.add('hide');
-  userName.style.borderColor = '';
+  userNameElem.classList.remove('border-color'); // userNameElem.style.borderColor = '';
 });
-userEmail && userEmail.addEventListener('focus', function (event) {
+document.getElementById('email').addEventListener('focus', function (event) {
   //validation
-  event.preventDefault();
+  //event.preventDefault();
+  var userEmailElem = document.getElementById('email');
+  var emailErr = document.getElementById('email-error');
   emailErr.classList.add('hide');
-  userEmail.style.borderColor = '';
+  userEmailElem.classList.remove('border-color'); // userEmailElem.style.borderColor = '';
 });
-userPassword && userPassword.addEventListener('focus', function (event) {
+document.getElementById('password').addEventListener('focus', function (event) {
   //validation
-  event.preventDefault();
+  // event.preventDefault();
+  var userPasswordElem = document.getElementById('password');
+  var pwErr = document.getElementById('password-error');
   pwErr.classList.add('hide');
-  userPassword.style.borderColor = '';
+  userPasswordElem.classList.remove('border-color'); //userPasswordElem.style.borderColor = '';
 });
-userConfirmPassword && userConfirmPassword.addEventListener('focus', function (event) {
+document.getElementById('password-confirm').addEventListener('focus', function (event) {
   //validation
-  event.preventDefault();
+  // event.preventDefault();
+  var userConfirmPasswordElem = document.getElementById('password-confirm');
+  var passErr = document.getElementById('confirm-password-error');
   passErr.classList.add('hide');
-  userConfirmPassword.style.borderColor = '';
+  userConfirmPasswordElem.classList.remove('border-color'); //userConfirmPasswordElem.style.borderColor = '';
 }); // HAMBURGER MENU
 
 /*
@@ -2396,11 +2423,11 @@ axios__WEBPACK_IMPORTED_MODULE_0___default().get("".concat(_config_js__WEBPACK_I
   //       orderTableRow.appendChild(orderTableCell);
   //     });
   // }
-  var loader = getId('loader');
+  var loader = document.getElementById('loader');
   loader.classList.add('hide');
 
   for (var i = 0; i < response.data.orders.length; i++) {
-    var orderTable = getId('order-table');
+    var orderTable = document.getElementById('order-table');
     orderTable.classList.remove('hide');
     var orderTableRow = document.createElement('tr');
     orderTableRow.classList.add('tr');

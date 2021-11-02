@@ -11478,6 +11478,10 @@ footer p {
   transition: all 0.5s;
 }
 
+.border-color {
+  border-color: tomato;
+}
+
 .hide {
   opacity: 0;
 }

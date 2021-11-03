@@ -28,9 +28,9 @@
                     </tbody>
                 </table>
             </div>
-            <div id="loader"></div>
+                 <div id="loader"></div>
+            </div>
         </div>
     </div>
-</div>
 
 @endsection

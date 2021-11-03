@@ -76,26 +76,47 @@ const { Input } = require("postcss");
 
 
 // REGISTER FORM VALIDATION
-document.getElementById('register-form').addEventListener('submit', function(event) {
-
+// console.log(document.getElementById('register-form'));
+document.getElementById('register-form') && document.getElementById('register-form').addEventListener('submit', function(event) {
+    
     event.preventDefault();
+    console.log(event);
+    const target   = event.target;
+    const formData = {};
 
-    registerValidation();
-   // const inputsRegisterValid = registerValidation(userName, userEmail, userPassword, userConfirmPassword);
-    /*console.log(inputsRegisterValid);
+    for (let i = 0; i < target.length - 1; i++) {
+        formData[target.elements[i].getAttribute("name")] = target.elements[i].value;
+    }
+
+    /*
+    // Storing data in local storage
+    const formDataString = JSON.stringify(formData);
+    localStorage.setItem('formData', formDataString);
+    
+    const formDataObject = JSON.parse(localStorage.getItem('formData'));
+    
+    console.log(localStorage);
+    */
+
+    // Calling register validation function
 
 
-    if (!inputsRegisterValid) {
+    const validInputsReg = registerValidation(formData);
+    
+    if (!validInputsReg) {
         return;
-    }*/
+    }
 
+    
     //axios req
- /*
-    const formData = {
+
+    
+    
+   /* const formData = {
         name: userName,
         email: userEmail,
         password: userPassword,
-    }
+    }*/
 
     axios(`${config.baseURL}/api/v1/register`, {
         method: 'POST',
@@ -110,13 +131,13 @@ document.getElementById('register-form').addEventListener('submit', function(eve
     })
     .catch(error => {
         console.log(error);
-    });*/
+    })
 });
+
 
 function registerValidation() {
     //validate    
     
-
     // Name validation
     const nameValid = nameValidation();
     if (!nameValid) {
@@ -157,28 +178,31 @@ function registerValidation() {
 
 // LOG IN FORM VALIDATION
 
-const loginForm = document.getElementById('login-form');
-
-
-loginForm && loginForm.addEventListener('submit', function(event) {
+document.getElementById('login-form') && document.getElementById('login-form').addEventListener('submit', function(event) {
     
     event.preventDefault();
 
-    const userEmail = userEmailElem.value;
-    const userPassword = userPasswordElem.value;
+    const target   = event.target;
+    const loginFormData = {};
 
-    const inputsLoginValid = loginValidation(userEmail, userPassword);
+    for (let i = 0; i < target.length - 1; i++) {
+    loginFormData[target.elements[i].getAttribute("name")] = target.elements[i].value;
+    }
+    
+    console.log(loginFormData);
 
-    if (!inputsLoginValid) {
+    const validInputsLog = loginValidation(loginFormData);
+
+    if (!validInputsLog) {
         return;
     }
 
     // axios req
-
+/*
     const loginFormData = {
-        email: userEmailElem.value,
-        password: userPasswordElem.value
-    }
+        email: document.getElementById('email').value,
+        password: document.getElementById('password'),value
+    }*/
 
     
     axios(`${config.baseURL}/api/v1/login`, {
@@ -315,7 +339,7 @@ function passwordConfirmation() {
     }
 };
 
-document.getElementById('name').addEventListener('focus', function(event) {
+document.getElementById('name') && document.getElementById('name').addEventListener('focus', function(event) {
     //validation
     // event.preventDefault();
     const userNameElem = document.getElementById('name');
@@ -325,7 +349,7 @@ document.getElementById('name').addEventListener('focus', function(event) {
     // userNameElem.style.borderColor = '';
 });
 
-document.getElementById('email').addEventListener('focus', function(event) {
+document.getElementById('email') && document.getElementById('email').addEventListener('focus', function(event) {
     //validation
     //event.preventDefault();
     const userEmailElem = document.getElementById('email');
@@ -335,7 +359,7 @@ document.getElementById('email').addEventListener('focus', function(event) {
     // userEmailElem.style.borderColor = '';
 });
 
-document.getElementById('password').addEventListener('focus', function(event) {
+document.getElementById('password') && document.getElementById('password').addEventListener('focus', function(event) {
     //validation
    // event.preventDefault();
     const userPasswordElem = document.getElementById('password');
@@ -345,7 +369,7 @@ document.getElementById('password').addEventListener('focus', function(event) {
     //userPasswordElem.style.borderColor = '';
 });
 
-document.getElementById('password-confirm').addEventListener('focus', function(event) {
+document.getElementById('password-confirm') && document.getElementById('password-confirm').addEventListener('focus', function(event) {
     //validation
    // event.preventDefault();
     const userConfirmPasswordElem = document.getElementById('password-confirm');
@@ -480,25 +504,33 @@ $(function() {
 */
 
 // HAMBURGER MENU
-/*
-const hamburger = getId('hamburger');
-const navMenu = getId('nav-menu');
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+const navbar = document.getElementById('navbar');
 
 hamburger.addEventListener('click', function() {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
 });
-*/
+
+document.onclick = function(e) {
+    if(e.target.id !== 'hamburger' && e.target.id !== 'nav-menu' && e.target.id !== 'navbar') {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+}
+
 
 // HAMBURGER MENU JQUERY
-
+/*
 const jqhamburger = $('#hamburger');
 const jqnavMenu = $('#nav-menu');
 
 jqhamburger.on('click', function() {
     jqhamburger.toggleClass('active');
     jqnavMenu.toggleClass('active');
-});
+});*/
 
 
 

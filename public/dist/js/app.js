@@ -2124,39 +2124,55 @@ var _require = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/po
 //const passErr = getId('confirm-password-error');
 //const errMsg = document.querySelector('.error-msg');
 // REGISTER FORM VALIDATION
+// console.log(document.getElementById('register-form'));
 
 
-document.getElementById('register-form').addEventListener('submit', function (event) {
+document.getElementById('register-form') && document.getElementById('register-form').addEventListener('submit', function (event) {
   event.preventDefault();
-  registerValidation(); // const inputsRegisterValid = registerValidation(userName, userEmail, userPassword, userConfirmPassword);
+  console.log(event);
+  var target = event.target;
+  var formData = {};
 
-  /*console.log(inputsRegisterValid);
-      if (!inputsRegisterValid) {
-      return;
-  }*/
-  //axios req
-
+  for (var i = 0; i < target.length - 1; i++) {
+    formData[target.elements[i].getAttribute("name")] = target.elements[i].value;
+  }
   /*
-     const formData = {
-         name: userName,
-         email: userEmail,
-         password: userPassword,
-     }
+  // Storing data in local storage
+  const formDataString = JSON.stringify(formData);
+  localStorage.setItem('formData', formDataString);
   
-     axios(`${config.baseURL}/api/v1/register`, {
-         method: 'POST',
-         headers: {
-             'Content-Type': 'application/json',
-             'Accept': 'application/json'
-         }, 
-         data: formData
-     })
-     .then(response => {
-         window.location.href = '/login';
-     })
-     .catch(error => {
-         console.log(error);
-     });*/
+  const formDataObject = JSON.parse(localStorage.getItem('formData'));
+  
+  console.log(localStorage);
+  */
+  // Calling register validation function
+
+
+  var validInputsReg = registerValidation(formData);
+
+  if (!validInputsReg) {
+    return;
+  } //axios req
+
+  /* const formData = {
+       name: userName,
+       email: userEmail,
+       password: userPassword,
+   }*/
+
+
+  axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/register"), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    data: formData
+  }).then(function (response) {
+    window.location.href = '/login';
+  })["catch"](function (error) {
+    console.log(error);
+  });
 });
 
 function registerValidation() {
@@ -2200,22 +2216,29 @@ function registerValidation() {
 } // LOG IN FORM VALIDATION
 
 
-var loginForm = document.getElementById('login-form');
-loginForm && loginForm.addEventListener('submit', function (event) {
+document.getElementById('login-form') && document.getElementById('login-form').addEventListener('submit', function (event) {
   event.preventDefault();
-  var userEmail = userEmailElem.value;
-  var userPassword = userPasswordElem.value;
-  var inputsLoginValid = loginValidation(userEmail, userPassword);
+  var target = event.target;
+  var loginFormData = {};
 
-  if (!inputsLoginValid) {
+  for (var i = 0; i < target.length - 1; i++) {
+    loginFormData[target.elements[i].getAttribute("name")] = target.elements[i].value;
+  }
+
+  console.log(loginFormData);
+  var validInputsLog = loginValidation(loginFormData);
+
+  if (!validInputsLog) {
     return;
   } // axios req
 
+  /*
+      const loginFormData = {
+          email: document.getElementById('email').value,
+          password: document.getElementById('password'),value
+      }*/
 
-  var loginFormData = {
-    email: userEmailElem.value,
-    password: userPasswordElem.value
-  };
+
   axios__WEBPACK_IMPORTED_MODULE_0___default()("".concat(_config_js__WEBPACK_IMPORTED_MODULE_2__.config.baseURL, "/api/v1/login"), {
     method: 'POST',
     headers: {
@@ -2350,7 +2373,7 @@ function passwordConfirmation() {
 }
 
 ;
-document.getElementById('name').addEventListener('focus', function (event) {
+document.getElementById('name') && document.getElementById('name').addEventListener('focus', function (event) {
   //validation
   // event.preventDefault();
   var userNameElem = document.getElementById('name');
@@ -2358,7 +2381,7 @@ document.getElementById('name').addEventListener('focus', function (event) {
   nameErr.classList.add('hide');
   userNameElem.classList.remove('border-color'); // userNameElem.style.borderColor = '';
 });
-document.getElementById('email').addEventListener('focus', function (event) {
+document.getElementById('email') && document.getElementById('email').addEventListener('focus', function (event) {
   //validation
   //event.preventDefault();
   var userEmailElem = document.getElementById('email');
@@ -2366,7 +2389,7 @@ document.getElementById('email').addEventListener('focus', function (event) {
   emailErr.classList.add('hide');
   userEmailElem.classList.remove('border-color'); // userEmailElem.style.borderColor = '';
 });
-document.getElementById('password').addEventListener('focus', function (event) {
+document.getElementById('password') && document.getElementById('password').addEventListener('focus', function (event) {
   //validation
   // event.preventDefault();
   var userPasswordElem = document.getElementById('password');
@@ -2374,7 +2397,7 @@ document.getElementById('password').addEventListener('focus', function (event) {
   pwErr.classList.add('hide');
   userPasswordElem.classList.remove('border-color'); //userPasswordElem.style.borderColor = '';
 });
-document.getElementById('password-confirm').addEventListener('focus', function (event) {
+document.getElementById('password-confirm') && document.getElementById('password-confirm').addEventListener('focus', function (event) {
   //validation
   // event.preventDefault();
   var userConfirmPasswordElem = document.getElementById('password-confirm');
@@ -2508,23 +2531,30 @@ $(function() {
 */
 // HAMBURGER MENU
 
-/*
-const hamburger = getId('hamburger');
-const navMenu = getId('nav-menu');
-
-hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
+var hamburger = document.getElementById('hamburger');
+var navMenu = document.getElementById('nav-menu');
+var navbar = document.getElementById('navbar');
+hamburger.addEventListener('click', function () {
+  hamburger.classList.toggle('active');
+  navMenu.classList.toggle('active');
 });
-*/
-// HAMBURGER MENU JQUERY
 
-var jqhamburger = $('#hamburger');
-var jqnavMenu = $('#nav-menu');
-jqhamburger.on('click', function () {
-  jqhamburger.toggleClass('active');
-  jqnavMenu.toggleClass('active');
-}); // REGISTER axios
+document.onclick = function (e) {
+  if (e.target.id !== 'hamburger' && e.target.id !== 'nav-menu' && e.target.id !== 'navbar') {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+  }
+}; // HAMBURGER MENU JQUERY
+
+/*
+const jqhamburger = $('#hamburger');
+const jqnavMenu = $('#nav-menu');
+
+jqhamburger.on('click', function() {
+    jqhamburger.toggleClass('active');
+    jqnavMenu.toggleClass('active');
+});*/
+// REGISTER axios
 // LOG IN axios
 // slusamo event na login dugmetu
 // pokupimo vrijednosti sa inputa

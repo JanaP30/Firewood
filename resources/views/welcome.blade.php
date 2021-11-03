@@ -38,6 +38,14 @@
                     </div>
                 
                 </div>
+                <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input name='email' type="text" id="address" class="form-control" placeholder="Email" required />
+                    </div>
+                
+                </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label class="form-label" for="phone_number">Phone Number</label>

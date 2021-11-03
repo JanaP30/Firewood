@@ -26,8 +26,18 @@ class LoginController extends Controller {
             return back()->withErrors($response->errors);
         }
 
-        return redirect('/home');
+        return redirect('/dashboard.show');
     }
+
+
+
+
+
+
+
+
+
+
 
 
 

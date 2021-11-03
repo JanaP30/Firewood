@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Repositories\Orders\OrdersService;
 use Illuminate\Http\Request;
 
 class PrintoutOfOrders extends Controller
@@ -47,7 +48,7 @@ class PrintoutOfOrders extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

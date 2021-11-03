@@ -25,7 +25,7 @@ class AuthController extends Controller
             return response()->json($response->errors, 422);
         }
         return response()->json($response->data, 200);
-    
+                                                                  
     } 
 
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
         $input = $request->input();
         $email = $input['email'];
         $password = $input['password'];
-        
+
         $response = AuthService::validateLogin($email, $password);
         if($response->errors){
             return response()->json($response->errors, 422);

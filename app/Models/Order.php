@@ -18,6 +18,7 @@ class Order extends Model
         'last_name',
         'address',
         'phone_number',
+        'email',
         'quantity',
         'product_type_id',
         'product_id',

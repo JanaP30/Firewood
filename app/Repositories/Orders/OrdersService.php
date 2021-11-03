@@ -34,6 +34,17 @@ class OrdersService {
         return new OrdersServiceResponse(true, [], $data);
     }
 
+    public static function getOrdersByEmail($email){
+
+
+        $data = [
+            'orders' => Order::where('email', $email)->paginate(10)
+        ];
+
+        return new OrdersServiceResponse(true, [], $data);
+
+    }
+
 }
 
 

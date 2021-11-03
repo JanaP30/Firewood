@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\ProductType;
+use App\Repositories\Orders\OrdersService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -48,15 +49,22 @@ class OrdersController extends Controller
         
     }
 
-    public function getOrders(){
-       $data['orders'] = Order::all();
-         
+    public function getOrdersByEmail($request){
+        
+        if(!$request->has('email')){
+            return response([
+                'error' => 'Missing email param.'
+            ], 422);
+        }
 
-        if (!$data){
+        $orders = OrdersService::getOrdersByEmail($request->input('email'));
 
-            response()->json($data, 200);
+        // $data['orders'] = Order::all();
+        if (!$orders->success){
+
+            response()->json($orders->errors, 404);
         }
             
-        return $data;
+        return $orders->data;
 }
 }

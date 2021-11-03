@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
-use App\Models\ProductType;
-use App\Models\Product;
 use App\Models\ProductProductType;
+use App\Models\User;
 use App\Repositories\Orders\OrdersService;
 use Exception;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -91,7 +89,8 @@ class OrdersController extends Controller
                 'quantity' => $input['quantity'],
                 'product_type_id' => $productTypeProduct->product_type_id,
                 'product_id' => $productTypeProduct->product_id,
-                'note' => $input['note']
+                'note' => $input['note'],
+                'email' => $input['email']
             ]);
 
             DB::commit();
@@ -116,7 +115,7 @@ class OrdersController extends Controller
      */
     public function show($id)
     {
-       
+        
     }
 
     /**
@@ -167,5 +166,13 @@ class OrdersController extends Controller
     public function success($orderId){
          
         return view('order.success', ['order' => Order::findOrFail($orderId)]);
+    }
+
+    public function getOrdersByEmail($email){
+        $data = [
+            'orders' => Order::where('email', $email)->paginate(10)
+        ];
+
+        return view('order.index', $data);
     }
 }

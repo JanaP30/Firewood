@@ -28,11 +28,11 @@
         "
     >
         <header class="d-flex flex-row bg-danger">
-            <img
+            {{-- <img
                 src="https://studio.code.org/media?u=https%3A%2F%2Fanimalcrossingworld.com%2Fwp-content%2Fuploads%2F2019%2F08%2Fanimal-crossing-pocket-camp-how-to-get-wood.png"
                 alt="Logo picture"
                 class="logo"
-            />
+            /> --}}
             <div class="navbar d-flex">
                 <a class="register" id="registerButton" href="#register"
                     >Register</a

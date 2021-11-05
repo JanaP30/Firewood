@@ -49,15 +49,15 @@ class OrdersController extends Controller
         
     }
 
-    public function getOrdersByEmail($request){
+    public function getOrdersByEmail($email, Request $request){
         
-        if(!$request->has('email')){
-            return response([
-                'error' => 'Missing email param.'
-            ], 422);
-        }
+        // if(!$request->has('email')){
+        //     return response([
+        //         'error' => 'Missing email param.'
+        //     ], 422);
+        // }
 
-        $orders = OrdersService::getOrdersByEmail($request->input('email'));
+        $orders = OrdersService::getOrdersByEmail($email);
 
         // $data['orders'] = Order::all();
         if (!$orders->success){
@@ -66,5 +66,9 @@ class OrdersController extends Controller
         }
             
         return $orders->data;
-}
+    }
+
+
+
+
 }

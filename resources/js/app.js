@@ -1,6 +1,9 @@
 import axios from "axios";
-import { data, post } from "jquery";
+// import { data, post } from "jquery";
 import { config } from './config.js';
+// import Handlebars from "handlebars";
+
+
 
 
 
@@ -80,13 +83,16 @@ const { Input } = require("postcss");
 document.getElementById('register-form') && document.getElementById('register-form').addEventListener('submit', function(event) {
     
     event.preventDefault();
-    console.log(event);
-    const target   = event.target;
+    
+    const target  = event.target;
     const formData = {};
 
     for (let i = 0; i < target.length - 1; i++) {
         formData[target.elements[i].getAttribute("name")] = target.elements[i].value;
     }
+
+    console.log(formData);
+    
 
     /*
     // Storing data in local storage
@@ -94,9 +100,10 @@ document.getElementById('register-form') && document.getElementById('register-fo
     localStorage.setItem('formData', formDataString);
     
     const formDataObject = JSON.parse(localStorage.getItem('formData'));
-    
     console.log(localStorage);
     */
+    
+    
 
     // Calling register validation function
 
@@ -135,32 +142,32 @@ document.getElementById('register-form') && document.getElementById('register-fo
 });
 
 
-function registerValidation() {
+function registerValidation(formData) {
     //validate    
     
     // Name validation
-    const nameValid = nameValidation();
+    const nameValid = nameValidation(formData.name);
     if (!nameValid) {
         console.log('Name is not valid!');
         // validationErrors.push('Name is not valid!');
     }
 
     // Email validation
-    const emailValid = emailValidation();
+    const emailValid = emailValidation(formData.email);
     if (!emailValid) {
         console.log('Email is not valid!');
         // validationErrors.push('Email is not valid!');
     }
     
     // Password validation
-    const passwordValid = passwordValidation();
+    const passwordValid = passwordValidation(formData.password);
     if (!passwordValid) {
         console.log('Password is not valid!');
         // validationErrors.push('Password is not valid!');
     }
     
     // Password confirmation
-    const passwordConfirmationValid = passwordConfirmation();
+    const passwordConfirmationValid = passwordConfirmation(formData.passwordConfirm);
     if (!passwordConfirmationValid) {
         console.log('Password confirmation is not valid!');
         // validationErrors.push('Password confirmation is not valid!');
@@ -223,17 +230,17 @@ document.getElementById('login-form') && document.getElementById('login-form').a
 );
 
 
-function loginValidation() {
+function loginValidation(loginFormData) {
    
     // Email validation
-    const emailValid = emailValidation();
+    const emailValid = emailValidation(loginFormData.email);
     if (!emailValid) {
         console.log('Email is not valid!');
         //loginErrors.push('Email is not valid!');
     }
    
     // Password validation
-    const passwordValid = passwordValidation();
+    const passwordValid = passwordValidation(loginFormData.password);
     if (!passwordValid) {
         console.log('Password is not valid!');
         //loginErrors.push('Password is not valid!');
@@ -245,7 +252,7 @@ function loginValidation() {
 // VALIDATION FUNCTIONS
 
 // Name validation function
-function nameValidation() {
+function nameValidation(name) {
     const nameRegex = /^[ a-zA-Z\-\’]+$/gi;
     const nameErr = document.getElementById('name-error');
     const userNameElem = document.getElementById('name');
@@ -268,7 +275,7 @@ function nameValidation() {
 
 
 // Email validation function
-function emailValidation() {
+function emailValidation(email) {
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/gi;
     const emailErr = document.getElementById('email-error');
     const userEmailElem = document.getElementById('email');
@@ -291,7 +298,7 @@ function emailValidation() {
 
 
 // Password validation function
-function passwordValidation() {
+function passwordValidation(password) {
     const pwRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gi;
     const pwErr = document.getElementById('password-error');
     const pwText = document.querySelector('.pw-text');
@@ -317,7 +324,7 @@ function passwordValidation() {
 };
 
 // Password confirmation function
-function passwordConfirmation() {
+function passwordConfirmation(passwordConfirm) {
     const passErr = document.getElementById('confirm-password-error');
     const userConfirmPasswordElem = document.getElementById('password-confirm');
     const userPasswordElem = document.getElementById('password');
@@ -407,15 +414,20 @@ $('#register-form').on('submit', function(event) {
 
 // napraviti async function koji vraca ordere i koristi await I try/catch blokove
 
+// HANDLEBARS
+
+
+
 // AXIOS ORDERS
 
-axios.get(`${config.baseURL}/api/v1/get-orders`, {
+axios.get(`${config.baseURL}/api/v1/get-orders-by-email/byzybuzo@mailinator.com`, {
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }
 })
 .then(response => {
+    
    
     // for (let i = 0; i < response.data.orders.length; i++) {
     //     const orderTable = document.getElementById('order-table');
@@ -430,6 +442,28 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
     // }
     const loader = document.getElementById('loader');
     loader.classList.add('hide');
+    loader.classList.add('none');
+
+    // HANDLEBARS
+    /*
+    // Retrieve the template data from the HTML (jQuery is used here).
+    const template = $('#handlebars-demo').html();
+
+    // Compile the template data into a function
+    const templateScript = Handlebars.compile('Hey');
+
+    const context = { "name" : "Ritesh Kumar", "occupation" : "developer" };
+
+    // html = 'My name is Ritesh Kumar. I am a developer.'
+    const html = templateScript(context);
+
+    // Insert the HTML code into the page
+    $(document.body).append(html);
+    */
+
+
+    
+    /*
     for (let i = 0; i < response.data.orders.length; i++) {
         const orderTable = document.getElementById('order-table');
         orderTable.classList.remove('hide');
@@ -473,7 +507,7 @@ axios.get(`${config.baseURL}/api/v1/get-orders`, {
              }
             orderTableRow.appendChild(orderTableCell);
         }
-    }
+    }*/
 })
 .catch(error => {
     console.log(error);
@@ -507,7 +541,7 @@ $(function() {
 
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
-const navbar = document.getElementById('navbar');
+
 
 hamburger.addEventListener('click', function() {
     hamburger.classList.toggle('active');

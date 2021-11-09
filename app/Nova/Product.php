@@ -5,6 +5,7 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Product extends Resource
@@ -21,7 +22,7 @@ class Product extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -45,6 +46,8 @@ class Product extends Resource
 
             Text::make('Name')
             ->sortable(),
+
+            HasMany::make('Orders')
         ];
     }
 

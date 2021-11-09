@@ -2,9 +2,15 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\CreateOrder;
+use App\Nova\Filters\CreatedAtFromDate;
+use App\Nova\Filters\CreatedAtToDate;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
@@ -29,7 +35,7 @@ class Order extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'email', 'first_name', 'last_name'
     ];
 
     /**
@@ -41,20 +47,20 @@ class Order extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable(),
+            ID::make(__('ID'), 'id')->sortable()
+            ->exceptOnForms(),
 
-            Text::make('First Name')
-            ->sortable(),
+            Text::make('First Name')->sortable()->readOnly(),
            
         
-            Text::make('Last Name')
+            Text::make('Last Name')->readOnly()
             ->sortable(),
 
-            Text::make('Address')
+            Text::make('Address')->readOnly()
             ->sortable(),
             
-            Text::make('Phone number')
-            ->sortable(),
+            Text::make('Phone number')->readOnly()
+            ->sortable()->hideFromIndex(),
             
             Text::make('Email')
             ->sortable(),
@@ -62,15 +68,16 @@ class Order extends Resource
             Text::make('Quantity')
             ->sortable(),
            
-            Text::make('Product type ID')
-            ->sortable(),
+        
             
-            Text::make('Product ID')
-            ->sortable(),
-            
-            Text::make('Note')
-            ->sortable(),
+            Textarea::make('Note')
+            ->sortable()->hideFromIndex(),
            
+            BelongsTo::make('Product')->exceptOnForms(),
+
+            BelongsTo::make('Product Type', 'productType', ProductType::class)->exceptOnForms(),
+
+            DateTime::make('Created At')->exceptOnForms()
 
 
         ];
@@ -95,7 +102,10 @@ class Order extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new CreatedAtFromDate,
+            new CreatedAtToDate
+        ];
     }
 
     /**
@@ -117,6 +127,8 @@ class Order extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new CreateOrder
+        ];
     }
 }

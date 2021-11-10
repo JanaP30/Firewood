@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Actions\CreateOrder;
+use App\Nova\Actions\SendEmail;
 use App\Nova\Filters\CreatedAtFromDate;
 use App\Nova\Filters\CreatedAtToDate;
 use Illuminate\Http\Request;
@@ -128,7 +129,11 @@ class Order extends Resource
     public function actions(Request $request)
     {
         return [
-            new CreateOrder
+            new CreateOrder,
+            new SendEmail
+
         ];
     }
+    
+
 }

@@ -13,9 +13,11 @@ use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Titasgailius\SearchRelations\SearchesRelations;
 
 class Order extends Resource
 {
+    use SearchesRelations;
     /**
      * The model the resource corresponds to.
      *
@@ -37,6 +39,11 @@ class Order extends Resource
      */
     public static $search = [
         'email', 'first_name', 'last_name'
+    ];
+
+    public static $searchRelations = [
+        'product' => ['name'],
+        'productType' => ['name']
     ];
 
     /**

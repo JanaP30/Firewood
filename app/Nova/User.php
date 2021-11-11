@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Text;
 
 class User extends Resource
 {
+    
     /**
      * The model the resource corresponds to.
      *
